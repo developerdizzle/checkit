@@ -1,0 +1,30 @@
+{
+  "name": "Silent Hill 2 Remake",
+  "groups": [
+    {
+      "name": "Location",
+      "tags": ["South Vale (East)"]
+    },
+    {
+      "name": "Type",
+      "tags": ["Glimpse of the Past", "Memo"]
+    }
+  ],
+  "items": [
+    {
+      "name": "Glimpse of the Past #1",
+      "url": "#",
+      "tags": ["Glimpse of the Past", "South Vale (East)"]
+    },
+    {
+      "name": "Glimpse of the Past #2",
+      "url": "#",
+      "tags": ["Glimpse of the Past", "South Vale (East)"]
+    },
+    {
+      "name": "Flower Shop Message",
+      "url": "#",
+      "tags": ["Memo", "South Vale (East)"]
+    }
+  ]
+}
