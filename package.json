@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@solid-primitives/storage": "^4.2.1",
+    "classcat": "^5.0.5",
     "solid-js": "^1.8.11"
   }
 }

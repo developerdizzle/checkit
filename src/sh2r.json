@@ -3,7 +3,7 @@
   "groups": [
     {
       "name": "Location",
-      "tags": ["South Vale (East)"]
+      "tags": ["South Vale (East)", "Woodside Apartments", "South Vale (West)", "Brookhaven Hospital", "Brookhaven Hospital (Otherworld)", "South Vale (Otherworld)", "South Vale (West Revisited)", "Silent Hill Historical Society", "Toluca Prison", "Labyrinth", "Toluca Lake", "Lakeview Hotel", "Lakeview Hotel (Otherworld)"]
     },
     {
       "name": "Type",
@@ -13,18 +13,111 @@
   "items": [
     {
       "name": "Glimpse of the Past #1",
-      "url": "#",
       "tags": ["South Vale (East)", "Glimpse of the Past"]
     },
     {
       "name": "Glimpse of the Past #2",
-      "url": "#",
       "tags": ["South Vale (East)", "Glimpse of the Past"]
     },
     {
+      "name": "Glimpse of the Past #3",
+      "tags": ["South Vale (East)", "Glimpse of the Past"]
+    },
+    {
+      "name": "Glimpse of the Past #4",
+      "tags": ["South Vale (East)", "Glimpse of the Past"]
+    },
+    {
+      "name": "Glimpse of the Past #5",
+      "tags": ["South Vale (East)", "Glimpse of the Past"]
+    },
+    {
+      "name": "Glimpse of the Past #6",
+      "tags": ["Woodside Apartments", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #7",
+      "tags": ["Woodside Apartments", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #8",
+      "tags": ["Woodside Apartments", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #9",
+      "tags": ["South Vale (West)", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #10",
+      "tags": ["South Vale (West)", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #11",
+      "tags": ["Brookhaven Hospital", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #12",
+      "tags": ["Brookhaven Hospital", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #13",
+      "tags": ["Brookhaven Hospital", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #14",
+      "tags": ["Brookhaven Hospital", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #15",
+      "tags": ["Brookhaven Hospital", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #16",
+      "tags": ["Brookhaven Hospital (Otherworld)", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #17",
+      "tags": ["South Vale (Otherworld)", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #18",
+      "tags": ["Toluca Prison", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #19",
+      "tags": ["Toluca Prison", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #20",
+      "tags": ["Toluca Prison", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #21",
+      "tags": ["Toluca Prison", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #22",
+      "tags": ["Labyrinth", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #23",
+      "tags": ["Lakeview Hotel", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #24",
+      "tags": ["Lakeview Hotel", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #25",
+      "tags": ["Lakeview Hotel", "Glimpse of the Past"]
+    },    
+    {
+      "name": "Glimpse of the Past #26  ",
+      "tags": ["Lakeview Hotel (Otherworld)", "Glimpse of the Past"]
+    },    
+    {
       "name": "Flower Shop Message",
-      "url": "#",
-      "tags": ["South Vale (East)", "Memo"]
+      "tags": ["Memo", "South Vale (East)"]
     }
   ]
 }
