@@ -32,65 +32,42 @@ function App() {
   );
 
   return (
-    <section class="prose">
-      <h1 class="text-x1">{data.name}</h1>
-      <Show when={data.groups?.length}>
+    <>
+      <header class="prose">
+        <h1 class="text-x1">{data.name}</h1>
+      </header>
+      <main class="prose">
+        <Show when={data.groups?.length}>
+          <section>
+            <div class="flex flex-row">
+              <label class="label">Group by</label>
+              <For each={data.groups}>
+                {(group) => {
+                  const isSelected = state.selectedGroup === group.name;
+
+                  const handleChange = (e) => {
+                    setState("selectedGroup", e.target.value);
+                  };
+
+                  return (
+                    <label class="label cursor-pointer mr-2">
+                      <span class="label-text mr-1">{group.name}</span>
+                      <input
+                        type="radio"
+                        class="radio radio-accent"
+                        name="group"
+                        value={group.name}
+                        checked={isSelected}
+                        onchange={handleChange}
+                      />
+                    </label>
+                  );
+                }}
+              </For>
+            </div>
+          </section>
+        </Show>
         <section>
-          <div class="flex flex-row">
-            <span class="text-bold">Group by</span>
-            <For each={data.groups}>
-              {(group) => {
-                const isSelected = state.selectedGroup === group.name;
-
-                const handleChange = (e) => {
-                  console.log("e", e);
-                  setState("selectedGroup", e.target.value);
-                };
-
-                return (
-                  <label class="label cursor-pointer mr-2">
-                    <span class="label-text mr-1">{group.name}</span>
-                    <input
-                      type="radio"
-                      class="radio radio-accent"
-                      name="group"
-                      value={group.name}
-                      checked={isSelected}
-                      onchange={handleChange}
-                    />
-                  </label>
-                );
-              }}
-            </For>
-          </div>
-        </section>
-      </Show>
-      <Show when={!group()}>
-        <div>
-          <For each={data.items}>
-            {(item) => {
-              const isComplete = state?.progress?.[item.name];
-
-              const handleChange = (e) => {
-                setState("progress", {
-                  [item.name]: e.target.checked || undefined,
-                });
-              };
-
-              return (
-                <Item
-                  name={item.name}
-                  tags={item.tags}
-                  isComplete={isComplete}
-                  onChange={handleChange}
-                />
-              );
-            }}
-          </For>
-        </div>
-      </Show>
-      <Show when={group()}>
-        <div>
           <For each={group().tags}>
             {(tag) => {
               const items = data.items.filter((item) =>
@@ -125,17 +102,17 @@ function App() {
               );
             }}
           </For>
-        </div>
-      </Show>
-      <p class="text-center mt-8">
-        <button
-          class="btn btn-secondary btn-outline btn-wide"
-          onclick={handleClear}
-        >
-          Clear
-        </button>
-      </p>
-    </section>
+        </section>
+        <p class="text-center mt-8">
+          <button
+            class="btn btn-secondary btn-outline btn-wide"
+            onclick={handleClear}
+          >
+            Clear
+          </button>
+        </p>
+      </main>
+    </>
   );
 }
 

@@ -1,5 +1,5 @@
 {
-  "name": "Silent Hill 2 Remake",
+  "name": "Silent Hill 2 Remake collectibles",
   "groups": [
     {
       "name": "Location",
@@ -14,17 +14,17 @@
     {
       "name": "Glimpse of the Past #1",
       "url": "#",
-      "tags": ["Glimpse of the Past", "South Vale (East)"]
+      "tags": ["South Vale (East)", "Glimpse of the Past"]
     },
     {
       "name": "Glimpse of the Past #2",
       "url": "#",
-      "tags": ["Glimpse of the Past", "South Vale (East)"]
+      "tags": ["South Vale (East)", "Glimpse of the Past"]
     },
     {
       "name": "Flower Shop Message",
       "url": "#",
-      "tags": ["Memo", "South Vale (East)"]
+      "tags": ["South Vale (East)", "Memo"]
     }
   ]
 }
