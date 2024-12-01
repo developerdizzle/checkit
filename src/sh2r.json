@@ -5,7 +5,8 @@
       "name": "Location",
       "tags": [
         "South Vale (East)",
-        "Woodside Apartments",
+        "Wood Side Apartments",
+        "Blue Creek Apartments",
         "South Vale (West)",
         "Brookhaven Hospital",
         "Brookhaven Hospital (Otherworld)",
@@ -26,36 +27,12 @@
   ],
   "items": [
     {
-      "name": "Administration Note",
-      "tags": ["Memo", "Wood Side Apartments"]
-    },
-    {
-      "name": "Strange Note",
-      "tags": ["Memo", "Wood Side Apartments"]
-    },
-    {
-      "name": "Sinister Note",
-      "tags": ["Memo", "Wood Side Apartments"]
-    },
-    {
-      "name": "\"Valentine's Day",
-      "tags": ["Strange Photo", "Wood Side Apartments"]
-    },
-    {
-      "name": "\"Career's humble beginnings\"",
-      "tags": ["Strange Photo", "Wood Side Apartments"]
-    },
-    {
-      "name": "\"Forever together\"",
-      "tags": ["Strange Photo", "Blue Creek Apartments"]
-    },
-    {
-      "name": "\"How the time flies\"",
-      "tags": ["Strange Photo", "Blue Creek Apartments"]
-    },
-    {
       "name": "Glimpse of the Past #1",
       "tags": ["Glimpse of the Past", "South Vale (East)"]
+    },
+    {
+      "name": "Flower Shop Message",
+      "tags": ["Memo", "South Vale (East)"]
     },
     {
       "name": "Glimpse of the Past #2",
@@ -66,18 +43,6 @@
       "tags": ["Glimpse of the Past", "South Vale (East)"]
     },
     {
-      "name": "Glimpse of the Past #4",
-      "tags": ["Glimpse of the Past", "South Vale (East)"]
-    },
-    {
-      "name": "Glimpse of the Past #5",
-      "tags": ["Glimpse of the Past", "South Vale (East)"]
-    },
-    {
-      "name": "Flower Shop Message",
-      "tags": ["Memo", "South Vale (East)"]
-    },
-    {
       "name": "Matchbook",
       "tags": ["Memo", "South Vale (East)"]
     },
@@ -85,6 +50,7 @@
       "name": "Martin Street Note",
       "tags": ["Memo", "South Vale (East)"]
     },
+
     {
       "name": "Big Jay's Note",
       "tags": ["Memo", "South Vale (East)"]
@@ -94,12 +60,29 @@
       "tags": ["Memo", "South Vale (East)"]
     },
     {
-      "name": "Texan Cafe Flyer",
-      "tags": ["Memo", "South Vale (East)"]
+      "name": "Glimpse of the Past #4",
+      "tags": ["Glimpse of the Past", "South Vale (East)"]
+    },
+    {
+      "name": "\"So many people here!\"",
+      "tags": ["Strange Photo", "South Vale (East)"]
     },
     {
       "name": "Barrier Note",
       "tags": ["Memo", "South Vale (East)"]
+    },
+    {
+      "name": "Glimpse of the Past #5",
+      "tags": ["Glimpse of the Past", "South Vale (East)"]
+    },
+
+    {
+      "name": "Texan Cafe Flyer",
+      "tags": ["Memo", "South Vale (East)"]
+    },
+    {
+      "name": "\"I've been happy\"",
+      "tags": ["Strange Photo", "South Vale (East)"]
     },
     {
       "name": "Old Map",
@@ -146,36 +129,68 @@
       "tags": ["Memo", "South Vale (East)"]
     },
     {
-      "name": "\"So many people here!\"",
-      "tags": ["Strange Photo", "South Vale (East)"]
+      "name": "Administration Note",
+      "tags": ["Memo", "Wood Side Apartments"]
     },
     {
-      "name": "\"I've been happy\"",
-      "tags": ["Strange Photo", "South Vale (East)"]
+      "name": "\"Valentine's Day",
+      "tags": ["Strange Photo", "Wood Side Apartments"]
     },
     {
       "name": "Glimpse of the Past #6",
-      "tags": ["Glimpse of the Past", "Woodside Apartments"]
+      "tags": ["Glimpse of the Past", "Wood Side Apartments"]
+    },
+    {
+      "name": "\"Career's humble beginnings\"",
+      "tags": ["Strange Photo", "Wood Side Apartments"]
+    },
+    {
+      "name": "Strange Note",
+      "tags": ["Memo", "Wood Side Apartments"]
+    },
+    {
+      "name": "Sinister Note",
+      "tags": ["Memo", "Wood Side Apartments"]
     },
     {
       "name": "Glimpse of the Past #7",
-      "tags": ["Glimpse of the Past", "Woodside Apartments"]
+      "tags": ["Glimpse of the Past", "Blue Creek Apartments"]
+    },
+    {
+      "name": "\"Forever together\"",
+      "tags": ["Strange Photo", "Blue Creek Apartments"]
+    },
+    {
+      "name": "\"How the time flies\"",
+      "tags": ["Strange Photo", "Blue Creek Apartments"]
     },
     {
       "name": "Glimpse of the Past #8",
-      "tags": ["Glimpse of the Past", "Woodside Apartments"]
+      "tags": ["Glimpse of the Past", "Wood Side Apartments"]
+    },
+    {
+      "name": "\"So far from home\"",
+      "tags": ["Strange Photo", "South Vale (West)"]
+    },
+    {
+      "name": "Bloody Note",
+      "tags": ["Memo", "South Vale (West)"]
     },
     {
       "name": "Glimpse of the Past #9",
       "tags": ["Glimpse of the Past", "South Vale (West)"]
     },
     {
+      "name": "Cryptic Letter (NG+)",
+      "tags": ["Memo", "South Vale (West)"]
+    },
+    {
       "name": "Glimpse of the Past #10",
       "tags": ["Glimpse of the Past", "South Vale (West)"]
     },
     {
-      "name": "Bloody Note",
-      "tags": ["Memo", "South Vale (West)"]
+      "name": "\"made it!\"",
+      "tags": ["Strange Photo", "South Vale (West)"]
     },
     {
       "name": "Reception Desk Note",
@@ -185,14 +200,7 @@
       "name": "Toolbox Memo",
       "tags": ["Memo", "South Vale (West)"]
     },
-    {
-      "name": "\"So far from home\"",
-      "tags": ["Strange Photo", "South Vale (West)"]
-    },
-    {
-      "name": "\"made it!\"",
-      "tags": ["Strange Photo", "South Vale (West)"]
-    },
+
     {
       "name": "\"Ready to kill it!\"",
       "tags": ["Strange Photo", "South Vale (West)"]
@@ -206,26 +214,6 @@
       "tags": ["Strange Photo", "South Vale (West)"]
     },
     {
-      "name": "Glimpse of the Past #11",
-      "tags": ["Glimpse of the Past", "Brookhaven Hospital"]
-    },
-    {
-      "name": "Glimpse of the Past #12",
-      "tags": ["Glimpse of the Past", "Brookhaven Hospital"]
-    },
-    {
-      "name": "Glimpse of the Past #13",
-      "tags": ["Glimpse of the Past", "Brookhaven Hospital"]
-    },
-    {
-      "name": "Glimpse of the Past #14",
-      "tags": ["Glimpse of the Past", "Brookhaven Hospital"]
-    },
-    {
-      "name": "Glimpse of the Past #15",
-      "tags": ["Glimpse of the Past", "Brookhaven Hospital"]
-    },
-    {
       "name": "Key Locker Note",
       "tags": ["Memo", "Brookhaven Hospital"]
     },
@@ -236,6 +224,14 @@
     {
       "name": "Staff Memo",
       "tags": ["Memo", "Brookhaven Hospital"]
+    },
+    {
+      "name": "\"Her drawings\"",
+      "tags": ["Strange Photo", "Brookhaven Hospital"]
+    },
+    {
+      "name": "Glimpse of the Past #11",
+      "tags": ["Glimpse of the Past", "Brookhaven Hospital"]
     },
     {
       "name": "Evaluation Card, Patient #0050",
@@ -254,56 +250,72 @@
       "tags": ["Memo", "Brookhaven Hospital"]
     },
     {
+      "name": "Glimpse of the Past #12",
+      "tags": ["Glimpse of the Past", "Brookhaven Hospital"]
+    },
+    {
       "name": "Scribbled Note",
       "tags": ["Memo", "Brookhaven Hospital"]
+    },
+    {
+      "name": "Glimpse of the Past #13",
+      "tags": ["Glimpse of the Past", "Brookhaven Hospital"]
     },
     {
       "name": "X-ray Memo",
       "tags": ["Memo", "Brookhaven Hospital"]
     },
     {
+      "name": "\"At least she was there\"",
+      "tags": ["Strange Photo", "Brookhaven Hospital"]
+    },
+    {
       "name": "Keypad Combination Note",
       "tags": ["Memo", "Brookhaven Hospital"]
     },
     {
-      "name": "Treatment Room Note",
-      "tags": ["Memo", "Brookhaven Hospital"]
+      "name": "Toolbox Memo",
+      "tags": ["Memo", "South Vale (West)"]
     },
     {
-      "name": "Safe Note",
-      "tags": ["Memo", "Brookhaven Hospital"]
+      "name": "Toolbox Memo",
+      "tags": ["Memo", "South Vale (West)"]
     },
     {
-      "name": "Page From A Diary",
-      "tags": ["Memo", "Brookhaven Hospital"]
+      "name": "Toolbox Memo",
+      "tags": ["Memo", "South Vale (West)"]
     },
     {
-      "name": "\"Her drawings\"",
-      "tags": ["Strange Photo", "Brookhaven Hospital"]
+      "name": "Toolbox Memo",
+      "tags": ["Memo", "South Vale (West)"]
     },
     {
-      "name": "\"At least she was there\"",
-      "tags": ["Strange Photo", "Brookhaven Hospital"]
+      "name": "Toolbox Memo",
+      "tags": ["Memo", "South Vale (West)"]
+    },
+    {
+      "name": "Toolbox Memo",
+      "tags": ["Memo", "South Vale (West)"]
+    },
+    {
+      "name": "Toolbox Memo",
+      "tags": ["Memo", "South Vale (West)"]
+    },
+    {
+      "name": "Toolbox Memo",
+      "tags": ["Memo", "South Vale (West)"]
     },
     {
       "name": "Glimpse of the Past #16",
       "tags": ["Glimpse of the Past", "Brookhaven Hospital (Otherworld)"]
     },
     {
-      "name": "Evaluation Card, Patient #3141",
-      "tags": ["Memo", "Brookhaven Hospital (Otherworld)"]
-    },
-    {
-      "name": "The Procedure",
-      "tags": ["Memo", "Brookhaven Hospital (Otherworld)"]
-    },
-    {
-      "name": "Calendar Page",
-      "tags": ["Memo", "Brookhaven Hospital (Otherworld)"]
-    },
-    {
       "name": "Patient's Note",
       "tags": ["Memo", "Brookhaven Hospital (Otherworld)"]
+    },
+    {
+      "name": "\"No one knows\"",
+      "tags": ["Strange Photo", "Brookhaven Hospital (Otherworld)"]
     },
     {
       "name": "Manic Scribble",
@@ -318,6 +330,10 @@
       "tags": ["Memo", "Brookhaven Hospital (Otherworld)"]
     },
     {
+      "name": "\"They mustn't know\"",
+      "tags": ["Strange Photo", "Brookhaven Hospital (Otherworld)"]
+    },
+    {
       "name": "Dissociated Notice",
       "tags": ["Memo", "Brookhaven Hospital (Otherworld)"]
     },
@@ -326,20 +342,12 @@
       "tags": ["Memo", "Brookhaven Hospital (Otherworld)"]
     },
     {
-      "name": "\"No one knows\"",
-      "tags": ["Strange Photo", "Brookhaven Hospital (Otherworld)"]
-    },
-    {
-      "name": "\"They mustn't know\"",
-      "tags": ["Strange Photo", "Brookhaven Hospital (Otherworld)"]
+      "name": "Note on a Map",
+      "tags": ["Memo", "South Vale (Otherworld)"]
     },
     {
       "name": "Glimpse of the Past #17",
       "tags": ["Glimpse of the Past", "South Vale (Otherworld)"]
-    },
-    {
-      "name": "Note on a Map",
-      "tags": ["Memo", "South Vale (Otherworld)"]
     },
     {
       "name": "Letter",
@@ -353,20 +361,9 @@
       "name": "\"The new clock\"",
       "tags": ["Strange Photo", "Silent Hill Historical Society"]
     },
+
     {
       "name": "Glimpse of the Past #18",
-      "tags": ["Glimpse of the Past", "Toluca Prison"]
-    },
-    {
-      "name": "Glimpse of the Past #19",
-      "tags": ["Glimpse of the Past", "Toluca Prison"]
-    },
-    {
-      "name": "Glimpse of the Past #20",
-      "tags": ["Glimpse of the Past", "Toluca Prison"]
-    },
-    {
-      "name": "Glimpse of the Past #21",
       "tags": ["Glimpse of the Past", "Toluca Prison"]
     },
     {
@@ -374,8 +371,16 @@
       "tags": ["Memo", "Toluca Prison"]
     },
     {
+      "name": "Glimpse of the Past #19",
+      "tags": ["Glimpse of the Past", "Toluca Prison"]
+    },
+    {
       "name": "Family Photo",
       "tags": ["Memo", "Toluca Prison"]
+    },
+    {
+      "name": "\"Four months to go\"",
+      "tags": ["Strange Photo", "Toluca Prison"]
     },
     {
       "name": "Guard's Letter",
@@ -394,8 +399,20 @@
       "tags": ["Memo", "Toluca Prison"]
     },
     {
+      "name": "Glimpse of the Past #20",
+      "tags": ["Glimpse of the Past", "Toluca Prison"]
+    },
+    {
+      "name": "\"Old man's always prepared\"",
+      "tags": ["Strange Photo", "Toluca Prison"]
+    },
+    {
       "name": "Prisoner's Letter",
       "tags": ["Memo", "Toluca Prison"]
+    },
+    {
+      "name": "Glimpse of the Past #21",
+      "tags": ["Glimpse of the Past", "Toluca Prison"]
     },
     {
       "name": "Unfinished Report",
@@ -404,14 +421,6 @@
     {
       "name": "Confession",
       "tags": ["Memo", "Toluca Prison"]
-    },
-    {
-      "name": "\"Four months to go\"",
-      "tags": ["Strange Photo", "Toluca Prison"]
-    },
-    {
-      "name": "\"Old man's always prepared\"",
-      "tags": ["Strange Photo", "Toluca Prison"]
     },
     {
       "name": "Glimpse of the Past #22",
@@ -425,20 +434,13 @@
       "name": "\"Your Best Buddy!\"",
       "tags": ["Strange Photo", "Labyrinth"]
     },
+
     {
       "name": "\"Road trip!\"",
       "tags": ["Strange Photo", "Toluca Lake"]
     },
     {
       "name": "Glimpse of the Past #23",
-      "tags": ["Glimpse of the Past", "Lakeview Hotel"]
-    },
-    {
-      "name": "Glimpse of the Past #24",
-      "tags": ["Glimpse of the Past", "Lakeview Hotel"]
-    },
-    {
-      "name": "Glimpse of the Past #25",
       "tags": ["Glimpse of the Past", "Lakeview Hotel"]
     },
     {
@@ -454,8 +456,28 @@
       "tags": ["Memo", "Lakeview Hotel"]
     },
     {
-      "name": "Door Photo + Stain Photo + Gate Photo",
+      "name": "Lost & Found Note (NG)",
       "tags": ["Memo", "Lakeview Hotel"]
+    },
+    {
+      "name": "\"aftermath…\"",
+      "tags": ["Strange Photo", "Lakeview Hotel"]
+    },
+    {
+      "name": "Door Photo",
+      "tags": ["Memo", "Lakeview Hotel"]
+    },
+    {
+      "name": "Stain Photo",
+      "tags": ["Memo", "Lakeview Hotel"]
+    },
+    {
+      "name": "Gate Photo",
+      "tags": ["Memo", "Lakeview Hotel"]
+    },
+    {
+      "name": "Glimpse of the Past #24",
+      "tags": ["Glimpse of the Past", "Lakeview Hotel"]
     },
     {
       "name": "Cleaning Staff Note #2",
@@ -466,16 +488,21 @@
       "tags": ["Memo", "Lakeview Hotel"]
     },
     {
+      "name": "Glimpse of the Past #25",
+      "tags": ["Glimpse of the Past", "Lakeview Hotel"]
+    },
+    {
       "name": "Keypad Numbers Memo",
       "tags": ["Memo", "Lakeview Hotel"]
     },
-    {
-      "name": "\"aftermath…\"",
-      "tags": ["Strange Photo", "Lakeview Hotel"]
-    },
+
     {
       "name": "\"Better leave…\"",
       "tags": ["Strange Photo", "Lakeview Hotel"]
+    },
+    {
+      "name": "\"Still can't get it right\"",
+      "tags": ["Strange Photo", "Lakeview Hotel (Otherworld)"]
     },
     {
       "name": "Glimpse of the Past #26  ",
@@ -484,10 +511,6 @@
     {
       "name": "Burned Note",
       "tags": ["Memo", "Lakeview Hotel (Otherworld)"]
-    },
-    {
-      "name": "\"Still can't get it right\"",
-      "tags": ["Strange Photo", "Lakeview Hotel (Otherworld)"]
     },
     {
       "name": "\"SHAPE FORCES THE MIND\"",

@@ -42,11 +42,23 @@ function App() {
 
   const handleSelectGroup = (group) => setState("selectedGroup", group.name);
 
+  const itemsWithoutTags = data.items.filter(
+    (item) => !item.tags.some((tag) => group().tags.includes(tag))
+  );
+
+  if (itemsWithoutTags.length) {
+    console.warn(
+      `Found ${itemsWithoutTags.length} items that did not match any tags: `,
+      itemsWithoutTags
+    );
+  }
+
   return (
     <>
       <header class="prose m-4 max-w-full">
         <h1 class="text-primary">{data.name}</h1>
         <progress
+          title={`${itemsCompleted()}/${data.items.length}`}
           class="progress progress-info rainbow-background"
           value={percentage()}
           max="100"
@@ -110,6 +122,7 @@ function App() {
                     <Show when={isCollapsed()}>
                       <>
                         <progress
+                          title={`${itemsCompleted()}/${items.length}`}
                           class="progress progress-info"
                           value={percentage()}
                           max="100"
