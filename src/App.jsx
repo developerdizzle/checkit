@@ -11,6 +11,7 @@ import { makePersisted } from "@solid-primitives/storage";
 
 import { IconComplete } from "./IconComplete";
 import { Item } from "./Item";
+import { Tabs } from "./Tabs";
 
 function App() {
   const [state, setState] = makePersisted(
@@ -39,45 +40,29 @@ function App() {
   const itemsCompleted = () => data.items.filter(getItemCompleted).length;
   const percentage = () => (itemsCompleted() * 100) / data.items.length;
 
+  const handleSelectGroup = (group) => setState("selectedGroup", group.name);
+
   return (
     <>
       <header class="prose m-4 max-w-full">
         <h1 class="text-primary">{data.name}</h1>
         <progress
-          class="progress progress-info"
+          class="progress progress-info rainbow-background"
           value={percentage()}
           max="100"
         />
+        <sub class="float-right">
+          {itemsCompleted()}/{data.items.length}
+        </sub>
       </header>
-      <main class="m-6">
+      <main class="m-6 mt-0">
         <Show when={data.groups?.length}>
           <section>
-            <div class="flex flex-row">
-              <label class="label">Group by</label>
-              <For each={data.groups}>
-                {(group) => {
-                  const isSelected = state.selectedGroup === group.name;
-
-                  const handleChange = (e) => {
-                    setState("selectedGroup", e.target.value);
-                  };
-
-                  return (
-                    <label class="label cursor-pointer mr-2">
-                      <span class="label-text mr-1">{group.name}</span>
-                      <input
-                        type="radio"
-                        class="radio radio-accent"
-                        name="group"
-                        value={group.name}
-                        checked={isSelected}
-                        onchange={handleChange}
-                      />
-                    </label>
-                  );
-                }}
-              </For>
-            </div>
+            <Tabs
+              tabs={data.groups}
+              selectedTab={state.selectedGroup}
+              onSelectTab={handleSelectGroup}
+            />
           </section>
         </Show>
         <section class="w-full gap-4 columns-1 md:columns-2 lg:columns-3">
@@ -98,49 +83,68 @@ function App() {
                   "flex",
                   "inline-block",
                   "mb-0",
+                  "cursor-pointer",
+                  "items-center",
                   {
                     "text-info": allComplete(),
                   },
                 ]);
 
+              const handleHeaderClick = () => {
+                setState("collapsed", {
+                  [tag]: !state?.collapsed?.[tag],
+                });
+              };
+
+              const isCollapsed = () => !state?.collapsed?.[tag];
+
               return (
                 <Show when={items.length > 0}>
-                  <div class="prose w-full break-inside-avoid-column mb-8">
-                    <h3 class={classes()}>
+                  <div class="prose w-full break-inside-avoid-column mb-4">
+                    <h3 class={classes()} onclick={handleHeaderClick}>
                       <span class="grow">{tag}</span>
                       {allComplete() && (
                         <IconComplete class="inline-block mr-1" />
                       )}
                     </h3>
-                    <progress
-                      class="progress progress-info"
-                      value={percentage()}
-                      max="100"
-                    />
-                    <div>
-                      <For each={items}>
-                        {(item) => {
-                          const isComplete = getItemCompleted(item);
+                    <Show when={isCollapsed()}>
+                      <>
+                        <progress
+                          class="progress progress-info"
+                          value={percentage()}
+                          max="100"
+                        />
+                        <div class="mb-4">
+                          <For each={items}>
+                            {(item) => {
+                              const isComplete = getItemCompleted(item);
 
-                          const handleChange = (e) => {
-                            setState("progress", {
-                              [item.name]: e.target.checked || undefined,
-                            });
-                          };
+                              const handleChange = (e) => {
+                                setState("progress", {
+                                  [item.name]: e.target.checked || undefined,
+                                });
+                                if (allComplete()) {
+                                  setState("collapsed", {
+                                    [tag]: true,
+                                  });
+                                }
+                              };
 
-                          const tags = item.tags.filter((t) => t !== tag);
+                              const tags = item.tags.filter((t) => t !== tag);
 
-                          return (
-                            <Item
-                              name={item.name}
-                              tags={tags}
-                              isComplete={isComplete}
-                              onChange={handleChange}
-                            />
-                          );
-                        }}
-                      </For>
-                    </div>
+                              return (
+                                <Item
+                                  name={item.name}
+                                  tags={tags}
+                                  isComplete={isComplete}
+                                  onChange={handleChange}
+                                />
+                              );
+                            }}
+                          </For>
+                        </div>
+                      </>
+                    </Show>
                   </div>
                 </Show>
               );
