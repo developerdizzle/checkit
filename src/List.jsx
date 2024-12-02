@@ -1,4 +1,3 @@
-import { createSignal, createComputed } from "solid-js";
 import cc from "classcat";
 
 import { IconComplete } from "./IconComplete";
@@ -13,11 +12,7 @@ function List() {
 
   const getItemCompleted = (item) => state?.progress?.[item.name];
 
-  const [group, setGroup] = createSignal("");
-
-  createComputed(() =>
-    setGroup(data.groups?.find((group) => group.name == state.selectedGroup))
-  );
+  const group = () => data.groups?.find((g) => g.name == state.selectedGroup);
 
   const itemsWithoutTags = data.items.filter(
     (item) => !item.tags.some((tag) => group().tags.includes(tag))
