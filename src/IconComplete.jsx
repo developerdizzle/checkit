@@ -3,8 +3,6 @@ import cc from "classcat";
 function IconComplete(props) {
   const classes = cc(["size-6", props.class]);
 
-  console.log(props.class);
-
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -6,7 +6,8 @@ function ClaimTopic() {
   return (
     <div class="h-screen flex items-center justify-center">
       <p>
-        No checklist has been made for {topic}. Would you like to{" "}
+        No checklist has been made for{" "}
+        <span class="text-secondary">{topic}</span>. Would you like to{" "}
         <a class="link link-primary" href={`${topic}/edit`}>
           create one?
         </a>

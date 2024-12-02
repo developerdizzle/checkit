@@ -4,7 +4,11 @@ function Edit() {
   const { topic } = useParams();
 
   return (
-    <p class="h-screen flex items-center justify-center">Editor for {topic}</p>
+    <div class="h-screen flex items-center justify-center">
+      <p>
+        Editor for&nbsp;<span class="text-secondary">{topic}</span>
+      </p>
+    </div>
   );
 }
 
