@@ -10,10 +10,10 @@ export function StateProvider(props) {
 
   const [state, setState] = makePersisted(
     createStore({
-      selectedGroup: data.groups?.[0]?.name,
+      selectedGroup: data?.groups?.[0]?.name,
     }),
     {
-      name: data.name,
+      name: data?.name,
     }
   );
 

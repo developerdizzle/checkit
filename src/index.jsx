@@ -1,15 +1,23 @@
-/* @refresh reload */
-import { render } from 'solid-js/web';
+import { render } from "solid-js/web";
+import { Router, Route } from "@solidjs/router";
 
-import './index.css';
-import App from './App';
+import { Home } from "./Home";
+import { App } from "./App";
+import { Edit } from "./Edit";
 
-const root = document.getElementById('root');
+const wrapper = document.getElementById("root");
 
-if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
-  throw new Error(
-    'Root element not found. Did you forget to add it to your index.html? Or maybe the id attribute got misspelled?',
-  );
+if (!wrapper) {
+  throw new Error("Wrapper div not found");
 }
 
-render(() => <App />, root);
+render(
+  () => (
+    <Router>
+      <Route path="/" component={Home} />
+      <Route path="/:topic/edit" component={Edit} />
+      <Route path="/:topic" component={App} />
+    </Router>
+  ),
+  document.getElementById("root")
+);
