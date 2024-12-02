@@ -1,4 +1,5 @@
 import { createContext, useContext, createResource } from "solid-js";
+import { useParams } from "@solidjs/router";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { doc, getDoc } from "firebase/firestore";
@@ -25,8 +26,7 @@ const DataContext = createContext();
 // import data from "./sh2r.json";
 
 export function DataProvider(props) {
-  const topic = getTopic();
-  console.log("topic", topic);
+  const { topic } = useParams();
 
   const [docSnap] = createResource(async () => {
     const docSnap = await getDoc(doc(db, "topics", topic));

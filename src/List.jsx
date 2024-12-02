@@ -1,3 +1,4 @@
+import { createEffect, createComputed } from "solid-js";
 import cc from "classcat";
 
 import { IconComplete } from "./IconComplete";
@@ -8,11 +9,16 @@ import { useState } from "./StateContext";
 
 function List() {
   const data = useData();
+
   const [state, setState] = useState();
 
   const getItemCompleted = (item) => state?.progress?.[item.name];
 
-  const group = () => data.groups?.find((g) => g.name == state.selectedGroup);
+  const group = () => data.groups.find((g) => g.name == state.selectedGroup);
+
+  if (!group()) {
+    setState("selectedGroup", data.groups[0].name);
+  }
 
   const itemsWithoutTags = data.items.filter(
     (item) => !item.tags.some((tag) => group().tags.includes(tag))

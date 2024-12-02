@@ -1,4 +1,5 @@
-import { createContext, useContext } from "solid-js";
+import { createContext, useContext, createEffect } from "solid-js";
+import { useParams } from "@solidjs/router";
 import { createStore } from "solid-js/store";
 import { makePersisted } from "@solid-primitives/storage";
 import { useData } from "./DataContext";
@@ -6,16 +7,16 @@ import { useData } from "./DataContext";
 const StateContext = createContext();
 
 export function StateProvider(props) {
+  const { topic } = useParams();
   const data = useData();
 
-  const [state, setState] = makePersisted(
-    createStore({
-      selectedGroup: data?.groups?.[0]?.name,
-    }),
-    {
-      name: data?.name,
-    }
-  );
+  console.log("data", data);
+
+  const [state, setState] = makePersisted(createStore({}), {
+    name: topic,
+  });
+
+  createEffect(() => console.log("state", state));
 
   return (
     <StateContext.Provider value={[state, setState]}>

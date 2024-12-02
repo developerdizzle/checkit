@@ -9,7 +9,7 @@ function Tabs() {
   const handleSelectGroup = (group) => setState("selectedGroup", group.name);
 
   return (
-    <Show when={data.groups?.length}>
+    <Show when={data.groups?.length > 1}>
       <section>
         <div
           role="tablist"

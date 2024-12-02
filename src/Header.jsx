@@ -12,7 +12,7 @@ function Header() {
 
   return (
     <header class="prose m-4 max-w-full">
-      <h1 class="text-primary">{data.name}</h1>
+      <h1 class="text-primary">{data.title}</h1>
       <progress
         title={`${itemsCompleted()}/${data.items.length}`}
         class="progress progress-info rainbow-background"
