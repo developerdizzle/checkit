@@ -10,13 +10,9 @@ export function StateProvider(props) {
   const { topic } = useParams();
   const data = useData();
 
-  console.log("data", data);
-
   const [state, setState] = makePersisted(createStore({}), {
     name: topic,
   });
-
-  createEffect(() => console.log("state", state));
 
   return (
     <StateContext.Provider value={[state, setState]}>

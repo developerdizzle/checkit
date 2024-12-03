@@ -20,6 +20,9 @@ importers:
       firebase:
         specifier: ^11.0.2
         version: 11.0.2
+      solid-firebase:
+        specifier: ^0.3.0
+        version: 0.3.0(firebase@11.0.2)(solid-js@1.8.11)
       solid-js:
         specifier: ^1.8.11
         version: 1.8.11
@@ -1698,6 +1701,12 @@ packages:
         optional: true
       vite:
         optional: true
+
+  solid-firebase@0.3.0:
+    resolution: {integrity: sha512-rpu1ltpNZV8L92naF7wMuwQKJC6ohg11+z2w+VohYf6aqEIZardmgIhSSLsyL8daZJ2wq6WO+n3bQMaXERZNFA==}
+    peerDependencies:
+      firebase: '>=9.0.0'
+      solid-js: '>=1.6.0'
 
   solid-js@1.8.11:
     resolution: {integrity: sha512-WdwmER+TwBJiN4rVQTVBxocg+9pKlOs41KzPYntrC86xO5sek8TzBYozPEZPL1IRWDouf2lMrvSbIs3CanlPvQ==}
@@ -3626,6 +3635,11 @@ snapshots:
       vite: 5.0.11(@types/node@22.10.1)
     transitivePeerDependencies:
       - supports-color
+
+  solid-firebase@0.3.0(firebase@11.0.2)(solid-js@1.8.11):
+    dependencies:
+      firebase: 11.0.2
+      solid-js: 1.8.11
 
   solid-js@1.8.11:
     dependencies:

@@ -1,32 +1,17 @@
 import { createContext, useContext, createResource } from "solid-js";
 import { useParams } from "@solidjs/router";
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { doc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { useFirebaseApp } from "solid-firebase";
 
 import { Loading } from "./Loading";
-import { getTopic } from "./getTopic";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDDz690srkGOWLbWXuGYeQCGm2vYuKL35A",
-  authDomain: "checkit-ac32f.firebaseapp.com",
-  projectId: "checkit-ac32f",
-  storageBucket: "checkit-ac32f.firebasestorage.app",
-  messagingSenderId: "717347341482",
-  appId: "1:717347341482:web:1cc11e7c4b90391553fcd3",
-  measurementId: "G-9F2MBBN0Z9",
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
 const DataContext = createContext();
 
-// import data from "./sh2r.json";
-
 export function DataProvider(props) {
   const { topic } = useParams();
+
+  const app = useFirebaseApp();
+  const db = getFirestore(app);
 
   const [docSnap] = createResource(async () => {
     const docSnap = await getDoc(doc(db, "topics", topic));
