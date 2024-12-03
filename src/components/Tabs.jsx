@@ -13,7 +13,7 @@ function Tabs() {
       <section>
         <div
           role="tablist"
-          class="tabs tabs-bordered tabs-lg md:w-1/2 mx-auto mb-8"
+          class="tabs tabs-bordered tabs-lg md:w-1/2 mx-auto mb-8 not-prose"
         >
           <For each={data.groups}>
             {(tab, i) => {

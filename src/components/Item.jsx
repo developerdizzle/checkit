@@ -8,7 +8,7 @@ function Item(props) {
             {(tag) => {
               return (
                 <span class="badge badge-accent badge-sm badge-xoutline mr-2 truncate justify-normal">
-                  {tag.toLowerCase()}
+                  {tag}
                 </span>
               );
             }}

@@ -1,31 +1,19 @@
 import { createEffect, createResource } from "solid-js";
 import { createStore, unwrap } from "solid-js/store";
 import { useParams } from "@solidjs/router";
-import cc from "classcat";
+
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { useFirebaseApp, useAuth } from "solid-firebase";
 import { getAuth } from "firebase/auth";
 
-import { Loading } from "../components/Loading";
+import { Tabs } from "../components/Tabs";
+import { List } from "../components/List";
 
-function TagSelect(props) {
-  return (
-    <select class="select" onchange={props.onchange} required={props.required}>
-      <option value="">Select a tag</option>
-      <For each={props.groups}>
-        {(group) => (
-          <optgroup label={group.name}>
-            <For each={group.tags}>
-              {(tag) => (
-                <option selected={tag === props.selectedTag}>{tag}</option>
-              )}
-            </For>
-          </optgroup>
-        )}
-      </For>
-    </select>
-  );
-}
+import { DataProvider } from "../components/DataContext";
+import { StateProvider } from "../components/StateContext";
+
+import { TagInput } from "../components/TagInput";
+import { Loading } from "../components/Loading";
 
 function Edit() {
   const { topic } = useParams();
@@ -43,9 +31,31 @@ function Edit() {
   });
 
   const [state, setState] = createStore({
-    title: "",
-    groups: [],
-    items: [],
+    title: "Summer reading list",
+    groups: [
+      {
+        name: "Author",
+        tags: ["Jane Austen", "Carl Sagan", "Stephen King"],
+      },
+      {
+        name: "Genre",
+        tags: ["Romance", "Fiction", "Horror", "Popular Science"],
+      },
+    ],
+    items: [
+      {
+        name: "Pride and Prejudice",
+        tags: ["Jane Austen", "Romance", "Fiction"],
+      },
+      {
+        name: "Cosmos",
+        tags: ["Carl Sagan", "Popular Science"],
+      },
+      {
+        name: "The Shining",
+        tags: ["Stephen King", "Fiction", "Horror"],
+      },
+    ],
   });
 
   createEffect(() => {
@@ -57,6 +67,8 @@ function Edit() {
   createEffect(() => {
     if (docSnap()) {
       if (docSnap().exists()) {
+        // setState("groups", undefined);
+        // setState("items", undefined);
         setState(docSnap().data());
       }
     }
@@ -102,93 +114,178 @@ function Edit() {
     e.target.value = "";
   };
 
-  const step1Complete = () => !!state.title;
-  const step2Complete = () =>
-    state.groups.length > 0 && state.groups[0].tags.length > 0;
-  const step3Complete = () =>
-    state.items.length > 0 && state.items[0].tags.length > 0;
+  const tagList = () =>
+    Array.from(
+      state.groups.reduce((tags, group) => {
+        group.tags.forEach((tag) => {
+          tags.add(tag);
+        });
+
+        return tags;
+      }, new Set())
+    );
 
   return (
     <Suspense fallback={<Loading />}>
       <Show when={docSnap()}>
         <form class="h-screen flex flex-row" onsubmit={handleSubmit}>
+          <datalist id="tags">
+            <For each={tagList()}>{(tag) => <option>{tag}</option>}</For>
+          </datalist>
           <div class="w-1/3 content-center p-8">
-            <ul class="steps steps-vertical">
-              <li
-                class={cc({
-                  "mb-2": true,
-                  step: true,
-                  "step-primary": step1Complete(),
-                })}
-              >
-                <div class="text-left align-top">
-                  <h3>Set a title</h3>
-                  <sub>This will show up at the top of the checklist page.</sub>
+            <ul class="timeline timeline-vertical">
+              <li>
+                <div class="timeline-start">
+                  <a class="link link-hover" href="#title">
+                    Set your title
+                  </a>
                 </div>
-              </li>
-              <li
-                class={cc({
-                  "mb-2": true,
-                  step: true,
-                  "step-primary": step2Complete(),
-                })}
-              >
-                <div class="text-left align-top">
-                  <h3>Add groups and tags</h3>
-                  <sub>
-                    Tags are characteristics of a checklist item (e.g.: sword,
-                    Lake Hylia, etc.). A group is a category of tags (e.g.:
-                    type, location, etc.).
-                  </sub>
+                <div class="timeline-middle">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="h-5 w-5"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
                 </div>
-              </li>
-              <li
-                class={cc({
-                  "mb-2": true,
-                  step: true,
-                  "step-primary": step3Complete(),
-                })}
-              >
-                <div class="text-left align-top">
-                  <h3>Add items</h3>
-                  <sub>
-                    Items are the actual checklist boxes. Each item can have one
-                    or more tags (defined above) to describe it.
-                  </sub>
+                <div class="timeline-end timeline-box text-xs">
+                  The title shows up at the top of the checklist
                 </div>
+                <hr />
               </li>
-              <li class="step" data-content="✓">
-                <p>
+              <li>
+                <hr />
+                <div class="timeline-start">
+                  <a class="link link-hover" href="#groups">
+                    Add your groups
+                  </a>
+                </div>
+                <div class="timeline-middle">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="h-5 w-5"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div class="timeline-end timeline-box text-xs">
+                  Groups are collections of tags that are used as categories for
+                  your checklist items.
+                </div>
+                <hr />
+              </li>
+              <li>
+                <hr />
+                <div class="timeline-start">
+                  <a class="link link-hover" href="#items">
+                    Add your items
+                  </a>
+                </div>
+                <div class="timeline-middle">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="h-5 w-5"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div class="timeline-end timeline-box text-xs">
+                  Items are the individual checkboxes, and can be tagged to
+                  enable grouping.
+                </div>
+                <hr />
+              </li>
+              <li>
+                <hr />
+                <div class="timeline-start">
+                  <a class="link link-hover" href="#preview">
+                    Preview
+                  </a>
+                </div>
+                <div class="timeline-middle">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="h-5 w-5"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div class="timeline-end timeline-box text-xs">
+                  Preview your checklist to make sure it looks right.
+                </div>
+                <hr />
+              </li>
+              <li>
+                <hr />
+                <div class="timeline-start"></div>
+                <div class="timeline-middle">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="h-5 w-5"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div class="timeline-end pl-1">
                   <button class="btn btn-primary" type="submit">
                     Save
                   </button>
-                </p>
+                </div>
               </li>
             </ul>
           </div>
           <div class="flex-1 flex overflow-hidden w-2/3 max-w-full prose">
-            <div class="flex-1 overflow-y-scroll p-4">
-              <h2 class="mt-2">
+            <div class="flex-1 overflow-y-scroll p-4 gap-2">
+              <h1>
                 Editing checklist <span class="text-secondary">{topic}</span>
-              </h2>
+              </h1>
               <section>
-                <label class="form-control w-full max-w-xs">
-                  <div class="label">
-                    <span class="label-text">
-                      What is the title of this list?
-                    </span>
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Enter title"
-                    class="input input-bordered w-full max-w-xs"
-                    value={state.title}
-                    onchange={handleChangeTitle}
-                    required
-                  />
-                </label>
+                <h2 id="title" class="mt-4 mb-2">
+                  Title
+                </h2>
+                <input
+                  type="text"
+                  placeholder="Enter title"
+                  class="input input-bordered w-full max-w-xs"
+                  value={state.title}
+                  onchange={handleChangeTitle}
+                  required
+                />
               </section>
               <section>
+                <h2 id="groups" class="mt-4 mb-2">
+                  Groups
+                </h2>
                 <For each={state.groups}>
                   {(group, g) => {
                     const handleGroupNameChange = (e) => {
@@ -205,56 +302,40 @@ function Edit() {
 
                     const [, setGroup] = createStore(group);
 
-                    const handleNewTagChange = (e) => {
-                      setGroup("tags", group.tags.length, e.target.value);
-
-                      e.target.value = "";
+                    const handleGroupTagChange = (tags) => {
+                      setGroup("tags", tags);
                     };
 
                     return (
-                      <p>
-                        <input
-                          class="input input-bordered"
-                          type="text"
-                          value={group.name}
-                          onchange={handleGroupNameChange}
-                          placeholder="Group name"
-                        />
-                        <For each={group.tags}>
-                          {(tag, t) => {
-                            const handleTagChange = (e) => {
-                              if (e.target.value) {
-                                setGroup("tags", t(), e.target.value);
-                              } else {
-                                setGroup("tags", (tagsState) =>
-                                  tagsState.filter((_, i) => i !== t())
-                                );
-                              }
-                            };
-
-                            return (
-                              <input
-                                class="input input-bordered"
-                                type="text"
-                                value={tag}
-                                onchange={handleTagChange}
-                                placeholder="Add new tag"
-                              />
-                            );
-                          }}
-                        </For>
-                        <input
-                          class="input input-bordered"
-                          type="text"
-                          onchange={handleNewTagChange}
-                          required={group.tags.length === 0}
-                          placeholder="Add new tag"
-                        />
-                      </p>
+                      <div class="flex flex-row gap-2">
+                        <label class="form-control w-full max-w-xs">
+                          <div class="label">
+                            <span class="label-text">Name</span>
+                          </div>
+                          <input
+                            class="input input-bordered"
+                            type="text"
+                            value={group.name}
+                            onchange={handleGroupNameChange}
+                            placeholder="Group name"
+                          />
+                        </label>
+                        <label class="form-control w-full max-w-xs">
+                          <div class="label">
+                            <span class="label-text">Tags</span>
+                          </div>
+                          <div class="flex flex-col gap-2">
+                            <TagInput
+                              tags={group.tags}
+                              onChange={handleGroupTagChange}
+                            />
+                          </div>
+                        </label>
+                      </div>
                     );
                   }}
                 </For>
-                <p>
+                <div>
                   <input
                     class="input input-bordered"
                     type="text"
@@ -262,9 +343,12 @@ function Edit() {
                     onchange={handleNewGroupNameChange}
                     required={state.groups.length === 0}
                   />
-                </p>
+                </div>
               </section>
               <section>
+                <h2 id="items" class="mt-4 mb-2">
+                  Items
+                </h2>
                 <For each={state.items}>
                   {(item, i) => {
                     const handleItemNameChange = (e) => {
@@ -281,52 +365,41 @@ function Edit() {
 
                     const [, setItem] = createStore(item);
 
-                    const handleNewItemTagChange = (e) => {
-                      setItem("tags", item.tags.length, e.target.value);
-
-                      e.target.value = "";
+                    const handleItemTagChange = (tags) => {
+                      setItem("tags", tags);
                     };
 
                     return (
-                      <p>
-                        <input
-                          class="input input-bordered"
-                          type="text"
-                          value={item.name}
-                          onchange={handleItemNameChange}
-                          placeholder="Item name"
-                        />
-                        <For each={item.tags}>
-                          {(tag, t) => {
-                            const handleItemTagChange = (e) => {
-                              if (e.target.value) {
-                                setItem("tags", t(), e.target.value);
-                              } else {
-                                setItem("tags", (tagsState) =>
-                                  tagsState.filter((_, i) => i !== t())
-                                );
-                              }
-                            };
-
-                            return (
-                              <TagSelect
-                                groups={state.groups}
-                                selectedTag={tag}
-                                onchange={handleItemTagChange}
-                              />
-                            );
-                          }}
-                        </For>
-                        <TagSelect
-                          groups={state.groups}
-                          onchange={handleNewItemTagChange}
-                          required={item.tags.length === 0}
-                        />
-                      </p>
+                      <div class="flex flex-row gap-2">
+                        <label class="form-control w-full max-w-xs">
+                          <div class="label">
+                            <span class="label-text">Name</span>
+                          </div>
+                          <input
+                            class="input input-bordered"
+                            type="text"
+                            value={item.name}
+                            onchange={handleItemNameChange}
+                            placeholder="Item name"
+                          />
+                        </label>
+                        <label class="form-control w-full max-w-xs">
+                          <div class="label">
+                            <span class="label-text">Tags</span>
+                          </div>
+                          <div class="flex flex-col gap-2">
+                            <TagInput
+                              tags={item.tags}
+                              list="tags"
+                              onChange={handleItemTagChange}
+                            />
+                          </div>
+                        </label>
+                      </div>
                     );
                   }}
                 </For>
-                <p>
+                <div>
                   <input
                     class="input input-bordered"
                     type="text"
@@ -334,8 +407,17 @@ function Edit() {
                     onchange={handleNewItemNameChange}
                     required={state.items.length === 0}
                   />
-                </p>
+                </div>
               </section>
+              {/* <section>
+                <h2 id="preview">Preview</h2>
+                <DataProvider>
+                  <StateProvider>
+                    <Tabs />
+                    <List />
+                  </StateProvider>
+                </DataProvider>
+              </section> */}
             </div>
           </div>
         </form>

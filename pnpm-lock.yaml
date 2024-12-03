@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@solid-primitives/set':
+        specifier: ^0.5.0
+        version: 0.5.0(solid-js@1.8.11)
       '@solid-primitives/storage':
         specifier: ^4.2.1
         version: 4.2.1(solid-js@1.8.11)
@@ -862,6 +865,11 @@ packages:
     peerDependencies:
       solid-js: ^1.6.12
 
+  '@solid-primitives/set@0.5.0':
+    resolution: {integrity: sha512-ccMQ89GtBrCZpGk4GKnWe+WurYe+UlK4yyiPxb0KetHqsBRLYcOkYHSDMmERNw3rwn8Cb/aVprKH0khoJqZe8g==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
   '@solid-primitives/static-store@0.0.5':
     resolution: {integrity: sha512-ssQ+s/wrlFAEE4Zw8GV499yBfvWx7SMm+ZVc11wvao4T5xg9VfXCL9Oa+x4h+vPMvSV/Knv5LrsLiUa+wlJUXQ==}
     peerDependencies:
@@ -886,6 +894,11 @@ packages:
 
   '@solid-primitives/styles@0.0.111':
     resolution: {integrity: sha512-1mBxOGAPXmfD5oYCvqjKBDN7SuNjz2qz7RdH7KtsuNLQh6lpuSKadtHnLvru0Y8Vz1InqTJisBIy/6P5kyDmPw==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/trigger@1.1.0':
+    resolution: {integrity: sha512-00BbAiXV66WwjHuKZc3wr0+GLb9C24mMUmi3JdTpNFgHBbrQGrIHubmZDg36c5/7wH+E0GQtOOanwQS063PO+A==}
     peerDependencies:
       solid-js: ^1.6.12
 
@@ -2791,6 +2804,11 @@ snapshots:
     dependencies:
       solid-js: 1.8.11
 
+  '@solid-primitives/set@0.5.0(solid-js@1.8.11)':
+    dependencies:
+      '@solid-primitives/trigger': 1.1.0(solid-js@1.8.11)
+      solid-js: 1.8.11
+
   '@solid-primitives/static-store@0.0.5(solid-js@1.8.11)':
     dependencies:
       '@solid-primitives/utils': 6.2.2(solid-js@1.8.11)
@@ -2810,6 +2828,11 @@ snapshots:
     dependencies:
       '@solid-primitives/rootless': 1.4.3(solid-js@1.8.11)
       '@solid-primitives/utils': 6.2.2(solid-js@1.8.11)
+      solid-js: 1.8.11
+
+  '@solid-primitives/trigger@1.1.0(solid-js@1.8.11)':
+    dependencies:
+      '@solid-primitives/utils': 6.2.3(solid-js@1.8.11)
       solid-js: 1.8.11
 
   '@solid-primitives/utils@6.2.2(solid-js@1.8.11)':
