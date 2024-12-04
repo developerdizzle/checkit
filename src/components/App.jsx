@@ -24,8 +24,6 @@ function App() {
 
   const [docSnap] = createResource(() => getDoc(doc(db, "topics", topic)));
 
-  createEffect(() => console.log(docSnap.loading));
-
   const data = () => docSnap()?.data();
 
   const [state, setState] = makePersisted(createStore({}), {
@@ -39,7 +37,7 @@ function App() {
   const handleCheckedItemsChanged = (checkedItems) =>
     setState("checkedItems", checkedItems);
 
-  const isOwner = () => data().uid === user?.uid;
+  const isOwner = () => data().uid === user?.data?.uid;
 
   const handleClearProgress = () => setState("checkedItems", undefined);
 
@@ -49,7 +47,7 @@ function App() {
         <Header
           title={data().title}
           items={data().items}
-          checkedItems={state.checkedItems || []}
+          checkedItems={state.checkedItems}
           isOwner={isOwner()}
         />
         <main class="m-6 mt-0">

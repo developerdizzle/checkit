@@ -9,6 +9,7 @@ function List(props) {
 
   const getItemCompleted = (item) => checkedItems().includes(item.name);
 
+  createEffect(() => setCheckedItems(props.checkedItems || []));
   createEffect(() => props.onCheckedItemsChange(checkedItems()));
 
   const group = () =>

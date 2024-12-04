@@ -275,7 +275,10 @@ function Edit() {
           <div class="flex-1 flex overflow-hidden w-2/3 max-w-full prose">
             <div class="flex-1 overflow-y-scroll p-4 gap-2">
               <h1>
-                Editing checklist <span class="text-secondary">{topic}</span>
+                Editing checklist{" "}
+                <a class="link link-hover link-secondary " href={`/${topic}`}>
+                  {topic}
+                </a>
               </h1>
               <section>
                 <h2 id="title" class="mt-4 mb-2">

@@ -1,17 +1,13 @@
-import { Show, createEffect } from "solid-js";
+import { Show, createEffect, createComputed } from "solid-js";
 import { useParams } from "@solidjs/router";
 
 function Header(props) {
   const { topic } = useParams();
 
-  const itemsLength = () => props.items?.length;
+  const itemsLength = () => props.items.length;
 
-  const itemsCompleted = () => props.checkedItems?.length;
+  const itemsCompleted = () => props.checkedItems?.length || 0;
   const percentage = () => (itemsCompleted() * 100) / itemsLength();
-
-  createEffect(() =>
-    console.log(itemsCompleted(), itemsLength(), percentage())
-  );
 
   return (
     <header class="prose m-4 max-w-full">

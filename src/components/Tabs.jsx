@@ -26,7 +26,7 @@ function Tabs(props) {
 
               return (
                 <a role="tab" class={classes()} onclick={handleClick}>
-                  Group by {tab.toLowerCase()}
+                  By {tab.toLowerCase()}
                 </a>
               );
             }}

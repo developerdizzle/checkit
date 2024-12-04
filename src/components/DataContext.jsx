@@ -20,8 +20,6 @@ export function DataProvider(props) {
 
   const [docSnap] = createResource(() => getDoc(doc(db, "topics", topic)));
 
-  createEffect(() => console.log(docSnap.loading));
-
   const data = () => docSnap()?.data();
 
   return (

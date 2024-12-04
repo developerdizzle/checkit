@@ -1,5 +1,7 @@
 function Home() {
-  return <div class="h-screen flex items-center justify-center">Home page</div>;
+  return (
+    <div class="h-screen flex items-center justify-center">Coming soon</div>
+  );
 }
 
 export { Home };
