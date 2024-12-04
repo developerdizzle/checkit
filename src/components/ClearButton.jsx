@@ -1,11 +1,7 @@
 function ClearButton(props) {
   const handleClear = () => {
     if (confirm("Clear all checkboxes?")) {
-      props.setState({
-        progress: undefined,
-        collapsed: undefined,
-        selectedGroup: undefined,
-      });
+      props.onClear();
     }
   };
 

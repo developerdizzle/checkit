@@ -1,5 +1,3 @@
-import { createEffect } from "solid-js";
-
 import { Tabs } from "./Tabs";
 import { List } from "./List";
 
