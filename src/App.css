@@ -1,7 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-.rainbow-background::progress-bar { 
-  background: linear-gradient(in hsl longer hue 45deg, red 0 0);
-}

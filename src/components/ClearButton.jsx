@@ -1,11 +1,7 @@
-import { useState } from "./StateContext";
-
-function ClearButton() {
-  const [state, setState] = useState();
-
+function ClearButton(props) {
   const handleClear = () => {
     if (confirm("Clear all checkboxes?")) {
-      setState({ progress: undefined, collapsed: undefined });
+      props.onClear();
     }
   };
 

@@ -1,15 +1,47 @@
-/* @refresh reload */
-import { render } from 'solid-js/web';
+import "./index.css";
 
-import './index.css';
-import App from './App';
+import { render } from "solid-js/web";
+import { Router, Route } from "@solidjs/router";
+import { initializeApp } from "firebase/app";
+import { FirebaseProvider } from "solid-firebase";
 
-const root = document.getElementById('root');
+import { Home } from "./pages/Home";
+import { List } from "./pages/List";
+import { Edit } from "./pages/Edit";
+import { SignIn } from "./components/SignIn";
+import { AuthGuard } from "./components/AuthGuard";
 
-if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
-  throw new Error(
-    'Root element not found. Did you forget to add it to your index.html? Or maybe the id attribute got misspelled?',
-  );
+const wrapper = document.getElementById("root");
+
+if (!wrapper) {
+  throw new Error("Wrapper div not found");
 }
 
-render(() => <App />, root);
+const firebaseConfig = {
+  apiKey: "AIzaSyDDz690srkGOWLbWXuGYeQCGm2vYuKL35A",
+  authDomain: "checkit-ac32f.firebaseapp.com",
+  projectId: "checkit-ac32f",
+  storageBucket: "checkit-ac32f.firebasestorage.app",
+  messagingSenderId: "717347341482",
+  appId: "1:717347341482:web:1cc11e7c4b90391553fcd3",
+  measurementId: "G-9F2MBBN0Z9",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+render(
+  () => (
+    <FirebaseProvider app={app}>
+      <Router>
+        <Route path="/" component={Home} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/" component={AuthGuard}>
+          <Route path="/:topic/edit" component={Edit} />
+        </Route>
+        <Route path="/:topic" component={List} />
+      </Router>
+    </FirebaseProvider>
+  ),
+  document.getElementById("root")
+);

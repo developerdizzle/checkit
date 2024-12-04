@@ -23,8 +23,12 @@
     "vite-plugin-solid": "^2.8.2"
   },
   "dependencies": {
+    "@solid-primitives/set": "^0.5.0",
     "@solid-primitives/storage": "^4.2.1",
+    "@solidjs/router": "^0.15.1",
     "classcat": "^5.0.5",
+    "firebase": "^11.0.2",
+    "solid-firebase": "^0.3.0",
     "solid-js": "^1.8.11"
   }
 }
