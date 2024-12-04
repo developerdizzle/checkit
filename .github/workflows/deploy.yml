@@ -30,6 +30,9 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Rename index.html to 404.html
+        run: mv dist/index.html dist/404.html
+
       - name: Upload static files as artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
