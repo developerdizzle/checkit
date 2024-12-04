@@ -1,3 +1,5 @@
+import cc from "classcat";
+
 import { createEffect, createResource } from "solid-js";
 import { createStore, unwrap } from "solid-js/store";
 import { useParams } from "@solidjs/router";
@@ -6,14 +8,38 @@ import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { useFirebaseApp, useAuth } from "solid-firebase";
 import { getAuth } from "firebase/auth";
 
-import { Tabs } from "../components/Tabs";
-import { List } from "../components/List";
-
-import { DataProvider } from "../components/DataContext";
 import { StateProvider } from "../components/StateContext";
-
 import { TagInput } from "../components/TagInput";
 import { Loading } from "../components/Loading";
+import { Preview } from "../components/Preview";
+
+const DEFAULT_DATA = {
+  title: "Summer reading list",
+  groups: [
+    {
+      name: "Author",
+      tags: ["Jane Austen", "Carl Sagan", "Stephen King"],
+    },
+    {
+      name: "Genre",
+      tags: ["Romance", "Fiction", "Horror", "Popular Science"],
+    },
+  ],
+  items: [
+    {
+      name: "Pride and Prejudice",
+      tags: ["Jane Austen", "Romance", "Fiction"],
+    },
+    {
+      name: "Cosmos",
+      tags: ["Carl Sagan", "Popular Science"],
+    },
+    {
+      name: "The Shining",
+      tags: ["Stephen King", "Fiction", "Horror"],
+    },
+  ],
+};
 
 function Edit() {
   const { topic } = useParams();
@@ -30,33 +56,7 @@ function Edit() {
     return docSnap;
   });
 
-  const [state, setState] = createStore({
-    title: "Summer reading list",
-    groups: [
-      {
-        name: "Author",
-        tags: ["Jane Austen", "Carl Sagan", "Stephen King"],
-      },
-      {
-        name: "Genre",
-        tags: ["Romance", "Fiction", "Horror", "Popular Science"],
-      },
-    ],
-    items: [
-      {
-        name: "Pride and Prejudice",
-        tags: ["Jane Austen", "Romance", "Fiction"],
-      },
-      {
-        name: "Cosmos",
-        tags: ["Carl Sagan", "Popular Science"],
-      },
-      {
-        name: "The Shining",
-        tags: ["Stephen King", "Fiction", "Horror"],
-      },
-    ],
-  });
+  const [state, setState] = createStore({ ...DEFAULT_DATA });
 
   createEffect(() => {
     if (user.data) {
@@ -67,8 +67,6 @@ function Edit() {
   createEffect(() => {
     if (docSnap()) {
       if (docSnap().exists()) {
-        // setState("groups", undefined);
-        // setState("items", undefined);
         setState(docSnap().data());
       }
     }
@@ -125,6 +123,8 @@ function Edit() {
       }, new Set())
     );
 
+  const step1Complete = () => state.title && state.title !== DEFAULT_DATA.title;
+
   return (
     <Suspense fallback={<Loading />}>
       <Show when={docSnap()}>
@@ -145,7 +145,10 @@ function Edit() {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-5 w-5"
+                    class={cc({
+                      "h-5 w-5": true,
+                      "text-primary": step1Complete(),
+                    })}
                   >
                     <path
                       fill-rule="evenodd"
@@ -157,7 +160,7 @@ function Edit() {
                 <div class="timeline-end timeline-box text-xs">
                   The title shows up at the top of the checklist
                 </div>
-                <hr />
+                <hr class={cc({ "bg-primary": step1Complete() })} />
               </li>
               <li>
                 <hr />
@@ -234,8 +237,13 @@ function Edit() {
                     />
                   </svg>
                 </div>
-                <div class="timeline-end timeline-box text-xs">
-                  Preview your checklist to make sure it looks right.
+                <div class="timeline-end pl-1">
+                  <button
+                    class="btn btn-primary"
+                    onClick="preview.showModal(); return false;"
+                  >
+                    Preview
+                  </button>
                 </div>
                 <hr />
               </li>
@@ -288,19 +296,17 @@ function Edit() {
                 </h2>
                 <For each={state.groups}>
                   {(group, g) => {
+                    const [, setGroup] = createStore(group);
+
                     const handleGroupNameChange = (e) => {
                       if (e.target.value) {
-                        setState("groups", g(), {
-                          name: e.target.value,
-                        });
+                        setGroup("name", e.target.value);
                       } else {
-                        setState("groups", (groupState) =>
-                          groupState.filter((_, i) => i !== g())
+                        setState("groups", (gs) =>
+                          gs.filter((_, i) => i !== g())
                         );
                       }
                     };
-
-                    const [, setGroup] = createStore(group);
 
                     const handleGroupTagChange = (tags) => {
                       setGroup("tags", tags);
@@ -351,19 +357,17 @@ function Edit() {
                 </h2>
                 <For each={state.items}>
                   {(item, i) => {
+                    const [, setItem] = createStore(item);
+
                     const handleItemNameChange = (e) => {
                       if (e.target.value) {
-                        setState("items", i(), {
-                          name: e.target.value,
-                        });
+                        setItem("name", e.target.value);
                       } else {
                         setState("items", (itemState) =>
                           itemState.filter((_, idx) => idx !== i())
                         );
                       }
                     };
-
-                    const [, setItem] = createStore(item);
 
                     const handleItemTagChange = (tags) => {
                       setItem("tags", tags);
@@ -409,18 +413,19 @@ function Edit() {
                   />
                 </div>
               </section>
-              {/* <section>
-                <h2 id="preview">Preview</h2>
-                <DataProvider>
-                  <StateProvider>
-                    <Tabs />
-                    <List />
-                  </StateProvider>
-                </DataProvider>
-              </section> */}
             </div>
           </div>
         </form>
+        <dialog id="preview" class="modal">
+          <div class="modal-box max-w-full h-screen ">
+            <StateProvider>
+              <Preview groups={state.groups} items={state.items} />
+            </StateProvider>
+          </div>
+          <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+          </form>
+        </dialog>
       </Show>
     </Suspense>
   );

@@ -1,4 +1,9 @@
-import { createContext, useContext, createResource } from "solid-js";
+import {
+  createContext,
+  createEffect,
+  useContext,
+  createResource,
+} from "solid-js";
 import { useParams } from "@solidjs/router";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useFirebaseApp } from "solid-firebase";
@@ -13,20 +18,18 @@ export function DataProvider(props) {
   const app = useFirebaseApp();
   const db = getFirestore(app);
 
-  const [docSnap] = createResource(async () => {
-    const docSnap = await getDoc(doc(db, "topics", topic));
+  const [docSnap] = createResource(() => getDoc(doc(db, "topics", topic)));
 
-    return docSnap;
-  });
+  createEffect(() => console.log(docSnap.loading));
+
+  const data = () => docSnap()?.data();
 
   return (
     <Suspense fallback={<Loading />}>
-      <Show when={docSnap()}>
-        <Show when={docSnap().exists()} fallback={props.fallback}>
-          <DataContext.Provider value={docSnap().data()}>
-            {props.children}
-          </DataContext.Provider>
-        </Show>
+      <Show when={data()} fallback={props.fallback}>
+        <DataContext.Provider value={data()}>
+          {props.children}
+        </DataContext.Provider>
       </Show>
     </Suspense>
   );

@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
 import { FirebaseProvider } from "solid-firebase";
 
 import { Home } from "./pages/Home";
-import { App } from "./pages/App";
+import { List } from "./pages/List";
 import { Edit } from "./pages/Edit";
 import { SignIn } from "./components/SignIn";
 import { AuthGuard } from "./components/AuthGuard";
@@ -39,7 +39,7 @@ render(
         <Route path="/" component={AuthGuard}>
           <Route path="/:topic/edit" component={Edit} />
         </Route>
-        <Route path="/:topic" component={App} />
+        <Route path="/:topic" component={List} />
       </Router>
     </FirebaseProvider>
   ),

@@ -3,6 +3,7 @@ import { useFirebaseApp, useAuth } from "solid-firebase";
 import { Switch, Match } from "solid-js";
 
 import { SignIn } from "./SignIn";
+import { Loading } from "./Loading";
 
 function AuthGuard(props) {
   const app = useFirebaseApp();
@@ -12,7 +13,7 @@ function AuthGuard(props) {
   return (
     <Switch fallback={<SignIn />}>
       <Match when={user.loading}>
-        <p>Loading...</p>
+        <Loading />
       </Match>
       <Match when={user.data}>{props.children}</Match>
     </Switch>

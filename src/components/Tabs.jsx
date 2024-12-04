@@ -1,37 +1,32 @@
+import { createEffect } from "solid-js";
 import cc from "classcat";
-import { useData } from "./DataContext";
-import { useState } from "./StateContext";
 
-function Tabs() {
-  const data = useData();
-  const [state, setState] = useState();
-
-  const handleSelectGroup = (group) => setState("selectedGroup", group.name);
+function Tabs(props) {
+  const selectedTab = () => props.selectedTab || props.tabs[0];
 
   return (
-    <Show when={data.groups?.length > 1}>
+    <Show when={props.tabs.length > 1}>
       <section>
         <div
           role="tablist"
           class="tabs tabs-bordered tabs-lg md:w-1/2 mx-auto mb-8 not-prose"
         >
-          <For each={data.groups}>
-            {(tab, i) => {
-              const isSelected = () => tab.name === state.selectedGroup;
+          <For each={props.tabs}>
+            {(tab) => {
               const classes = () => {
                 return cc({
                   tab: true,
-                  "tab-active": isSelected(),
+                  "tab-active": tab === selectedTab(),
                 });
               };
 
               const handleClick = () => {
-                handleSelectGroup(tab);
+                props.onSelectTab(tab);
               };
 
               return (
                 <a role="tab" class={classes()} onclick={handleClick}>
-                  Group by {tab.name.toLowerCase()}
+                  Group by {tab.toLowerCase()}
                 </a>
               );
             }}

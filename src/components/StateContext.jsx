@@ -8,7 +8,6 @@ const StateContext = createContext();
 
 export function StateProvider(props) {
   const { topic } = useParams();
-  const data = useData();
 
   const [state, setState] = makePersisted(createStore({}), {
     name: topic,
