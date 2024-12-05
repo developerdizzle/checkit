@@ -45,13 +45,8 @@ function App() {
   return (
     <Suspense fallback={<Loading />}>
       <Show when={data()} fallback={<ClaimTopic />}>
-        <Header
-          title={data().title}
-          items={data().items}
-          checkedItems={state.checkedItems}
-          isOwner={isOwner()}
-        />
-        <main class="m-6 mt-0">
+        <Header title={data().title} isOwner={isOwner()} />
+        <main class="p-6 pt-0">
           <ProgressBar items={data().items} checkedItems={state.checkedItems} />
           <Tabs
             selectedTab={state.selectedGroup}

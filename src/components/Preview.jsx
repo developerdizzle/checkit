@@ -1,10 +1,10 @@
+import { createStore } from "solid-js/store";
+
 import { Tabs } from "./Tabs";
 import { List } from "./List";
 
-import { useState } from "./StateContext";
-
 function Preview(props) {
-  const [state, setState] = useState();
+  const [state, setState] = createStore({});
 
   const handleSelectTab = (tab) => setState("selectedGroup", tab);
 

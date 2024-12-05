@@ -8,7 +8,6 @@ import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { useFirebaseApp, useAuth } from "solid-firebase";
 import { getAuth } from "firebase/auth";
 
-import { StateProvider } from "../components/StateContext";
 import { TagInput } from "../components/TagInput";
 import { Loading } from "../components/Loading";
 import { Preview } from "../components/Preview";
@@ -134,7 +133,7 @@ function Edit() {
           <div class="w-1/3 hidden md:block content-center p-8">
             <Instructions />
           </div>
-          <div class="flex-1 flex md:overflow-hidden md:w-2/3 max-w-full prose">
+          <div class="flex-1 flex md:overflow-hidden md:w-2/3 max-w-full">
             <div class="flex-1 overflow-y-scroll p-4 gap-2">
               <h1>
                 Editing checklist{" "}
@@ -294,9 +293,7 @@ function Edit() {
         </form>
         <dialog id="preview" class="modal">
           <div class="modal-box max-w-full h-screen ">
-            <StateProvider>
-              <Preview groups={state.groups} items={state.items} />
-            </StateProvider>
+            <Preview groups={state.groups} items={state.items} />
           </div>
           <form method="dialog" class="modal-backdrop">
             <button>close</button>

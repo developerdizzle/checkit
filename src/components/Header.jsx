@@ -13,11 +13,6 @@ import { useSignIn } from "./SignInContext";
 function Header(props) {
   const { topic } = useParams();
 
-  const itemsLength = () => props.items.length;
-
-  const itemsCompleted = () => props.checkedItems?.length || 0;
-  const percentage = () => (itemsCompleted() * 100) / itemsLength();
-
   const app = useFirebaseApp();
   const auth = getAuth(app);
   const user = useAuth(auth);
@@ -27,10 +22,10 @@ function Header(props) {
   const signOut = () => auth.signOut();
 
   return (
-    <header>
-      <div class="navbar bg-base-100">
+    <header class="pl-4 pr-4">
+      <div class="navbar">
         <div class="navbar-start">
-          <h1 class="text-2xl text-primary">{props.title}</h1>
+          <h1 class="md:text-2xl font-bold text-primary">{props.title}</h1>
         </div>
         <div class="navbar-end">
           <Show when={props.isOwner}>
@@ -74,32 +69,7 @@ function Header(props) {
           </Show>
         </div>
       </div>
-      {/* <progress
-        title={`${itemsCompleted()}/${itemsLength()}`}
-        class="progress progress-info ml-4 mr-4"
-        value={percentage()}
-        max="100"
-      />
-      <span class="text-xs">
-        {itemsCompleted()}/{itemsLength()}
-      </span> */}
     </header>
-
-    // {/* // <header class="prose m-4 max-w-full">
-    //   <h1 class="text-primary">{props.title}</h1>
-    //   <Show when={props.isOwner}>
-    //     <a href={`${topic}/edit`}>Edit this checklist</a>
-    //   </Show>
-    //   <progress
-    //     title={`${itemsCompleted()}/${itemsLength()}`}
-    //     class="progress progress-info rainbow-background"
-    //     value={percentage()}
-    //     max="100"
-    //   />
-    //   <sub class="float-right">
-    //     {itemsCompleted()}/{itemsLength()}
-    //   </sub>
-    // </header> */}
   );
 }
 
