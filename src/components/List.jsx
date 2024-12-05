@@ -39,22 +39,20 @@ function List(props) {
           const percentage = () => (itemsCompleted() * 100) / items().length;
           const allComplete = () => itemsCompleted() == items().length;
 
-          const classes = () =>
-            cc([
-              "flex",
-              "inline-block",
-              "mb-0",
-              "items-center",
-              {
-                "text-info": allComplete(),
-              },
-            ]);
-
           return (
             <Show when={items().length > 0}>
-              <div class="prose w-full break-inside-avoid-column mb-4">
-                <h3 class={classes()}>
-                  <span class="grow">{tag}</span>
+              <div class="break-inside-avoid-column mb-4">
+                <h3
+                  class={cc([
+                    "flex",
+                    "text-lg",
+                    "font-bold",
+                    {
+                      "text-info": allComplete(),
+                    },
+                  ])}
+                >
+                  {tag}
                 </h3>
                 <progress
                   title={`${itemsCompleted()}/${items().length}`}
@@ -66,9 +64,6 @@ function List(props) {
                   <For each={items()}>
                     {(item) => {
                       const isComplete = () => getItemCompleted(item);
-
-                      // const handleChange = (e) =>
-                      //   props.onChangeProgress(item.name, e.target.checked);
 
                       const handleChange = (e) => {
                         if (e.target.checked) {

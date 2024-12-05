@@ -10,6 +10,8 @@ import { List } from "./pages/List";
 import { Edit } from "./pages/Edit";
 import { SignIn } from "./components/SignIn";
 import { AuthGuard } from "./components/AuthGuard";
+import { Layout } from "./components/Layout";
+import { SignInProvider } from "./components/SignInContext";
 
 const wrapper = document.getElementById("root");
 
@@ -33,14 +35,18 @@ const app = initializeApp(firebaseConfig);
 render(
   () => (
     <FirebaseProvider app={app}>
-      <Router>
-        <Route path="/" component={Home} />
-        <Route path="/signin" component={SignIn} />
-        <Route path="/" component={AuthGuard}>
-          <Route path="/:topic/edit" component={Edit} />
-        </Route>
-        <Route path="/:topic" component={List} />
-      </Router>
+      <SignInProvider>
+        <Router>
+          <Route path="/" component={Home} />
+          <Route path="/signin" component={SignIn} />
+          <Route path="/" component={AuthGuard}>
+            <Route path="/:topic/edit" component={Edit} />
+          </Route>
+          <Route path="/:topic" component={Layout}>
+            <Route path="/" component={List} />
+          </Route>
+        </Router>
+      </SignInProvider>
     </FirebaseProvider>
   ),
   document.getElementById("root")

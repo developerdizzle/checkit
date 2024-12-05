@@ -9,7 +9,7 @@ function Tabs(props) {
       <section>
         <div
           role="tablist"
-          class="tabs tabs-bordered tabs-lg md:w-1/2 mx-auto mb-8 not-prose"
+          class="tabs tabs-bordered tabs-lg md:w-1/2 mx-auto mb-6 not-prose"
         >
           <For each={props.tabs}>
             {(tab) => {

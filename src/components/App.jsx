@@ -13,6 +13,7 @@ import { List } from "./List";
 import { ClearButton } from "./ClearButton";
 import { ClaimTopic } from "./ClaimTopic";
 import { Loading } from "./Loading";
+import { ProgressBar } from "./ProgressBar";
 
 function App() {
   const { topic } = useParams();
@@ -51,6 +52,7 @@ function App() {
           isOwner={isOwner()}
         />
         <main class="m-6 mt-0">
+          <ProgressBar items={data().items} checkedItems={state.checkedItems} />
           <Tabs
             selectedTab={state.selectedGroup}
             onSelectTab={handleSelectTab}

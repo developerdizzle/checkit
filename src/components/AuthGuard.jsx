@@ -1,9 +1,15 @@
 import { getAuth } from "firebase/auth";
 import { useFirebaseApp, useAuth } from "solid-firebase";
-import { Switch, Match } from "solid-js";
+import { Switch, Match, createEffect, onMount } from "solid-js";
 
-import { SignIn } from "./SignIn";
 import { Loading } from "./Loading";
+import { useSignIn } from "./SignInContext";
+
+function TriggerSignIn() {
+  const [, setIsSignInOpen] = useSignIn();
+
+  onMount(() => setIsSignInOpen(true));
+}
 
 function AuthGuard(props) {
   const app = useFirebaseApp();
@@ -11,7 +17,7 @@ function AuthGuard(props) {
   const user = useAuth(auth);
 
   return (
-    <Switch fallback={<SignIn />}>
+    <Switch fallback={<TriggerSignIn />}>
       <Match when={user.loading}>
         <Loading />
       </Match>

@@ -12,6 +12,7 @@ import { StateProvider } from "../components/StateContext";
 import { TagInput } from "../components/TagInput";
 import { Loading } from "../components/Loading";
 import { Preview } from "../components/Preview";
+import { Instructions } from "../components/Instructions";
 
 const DEFAULT_DATA = {
   title: "Summer reading list",
@@ -123,8 +124,6 @@ function Edit() {
       }, new Set())
     );
 
-  const step1Complete = () => state.title && state.title !== DEFAULT_DATA.title;
-
   return (
     <Suspense fallback={<Loading />}>
       <Show when={docSnap()}>
@@ -132,147 +131,10 @@ function Edit() {
           <datalist id="tags">
             <For each={tagList()}>{(tag) => <option>{tag}</option>}</For>
           </datalist>
-          <div class="w-1/3 content-center p-8">
-            <ul class="timeline timeline-vertical">
-              <li>
-                <div class="timeline-start">
-                  <a class="link link-hover" href="#title">
-                    Set your title
-                  </a>
-                </div>
-                <div class="timeline-middle">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class={cc({
-                      "h-5 w-5": true,
-                      "text-primary": step1Complete(),
-                    })}
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <div class="timeline-end timeline-box text-xs">
-                  The title shows up at the top of the checklist
-                </div>
-                <hr class={cc({ "bg-primary": step1Complete() })} />
-              </li>
-              <li>
-                <hr />
-                <div class="timeline-start">
-                  <a class="link link-hover" href="#groups">
-                    Add your groups
-                  </a>
-                </div>
-                <div class="timeline-middle">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-5 w-5"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <div class="timeline-end timeline-box text-xs">
-                  Groups are collections of tags that are used as categories for
-                  your checklist items.
-                </div>
-                <hr />
-              </li>
-              <li>
-                <hr />
-                <div class="timeline-start">
-                  <a class="link link-hover" href="#items">
-                    Add your items
-                  </a>
-                </div>
-                <div class="timeline-middle">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-5 w-5"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <div class="timeline-end timeline-box text-xs">
-                  Items are the individual checkboxes, and can be tagged to
-                  enable grouping.
-                </div>
-                <hr />
-              </li>
-              <li>
-                <hr />
-                <div class="timeline-start">
-                  <a class="link link-hover" href="#preview">
-                    Preview
-                  </a>
-                </div>
-                <div class="timeline-middle">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-5 w-5"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <div class="timeline-end pl-1">
-                  <button
-                    class="btn btn-primary"
-                    onClick="preview.showModal(); return false;"
-                  >
-                    Preview
-                  </button>
-                </div>
-                <hr />
-              </li>
-              <li>
-                <hr />
-                <div class="timeline-start"></div>
-                <div class="timeline-middle">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-5 w-5"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <div class="timeline-end pl-1">
-                  <button class="btn btn-primary" type="submit">
-                    Save
-                  </button>
-                </div>
-              </li>
-            </ul>
+          <div class="w-1/3 hidden md:block content-center p-8">
+            <Instructions />
           </div>
-          <div class="flex-1 flex overflow-hidden w-2/3 max-w-full prose">
+          <div class="flex-1 flex md:overflow-hidden md:w-2/3 max-w-full prose">
             <div class="flex-1 overflow-y-scroll p-4 gap-2">
               <h1>
                 Editing checklist{" "}
@@ -415,6 +277,17 @@ function Edit() {
                     required={state.items.length === 0}
                   />
                 </div>
+              </section>
+              <section class="flex flex-row gap-2 p-4 justify-center">
+                <button
+                  class="btn btn-secondary"
+                  onClick="preview.showModal(); return false;"
+                >
+                  Preview
+                </button>
+                <button class="btn btn-primary" type="submit">
+                  Save
+                </button>
               </section>
             </div>
           </div>
