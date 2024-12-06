@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.timeline-vertical:where(.timeline-snap-icon)>li {
+  --timeline-col-start: 1rem;
+}

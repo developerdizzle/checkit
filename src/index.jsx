@@ -5,13 +5,15 @@ import { Router, Route } from "@solidjs/router";
 import { initializeApp } from "firebase/app";
 import { FirebaseProvider } from "solid-firebase";
 
-import { Home } from "./pages/Home";
-import { List } from "./pages/List";
-import { Edit } from "./pages/Edit";
-import { SignIn } from "./components/SignIn";
-import { AuthGuard } from "./components/AuthGuard";
 import { Layout } from "./components/Layout";
+
+import { Home } from "./pages/Home";
+import { App } from "./pages/App";
+import { Edit } from "./pages/Edit";
+
+import { RequireAuth } from "./components/RequireAuth";
 import { SignInProvider } from "./components/SignInContext";
+import { DataProvider } from "./components/DataContext";
 
 const wrapper = document.getElementById("root");
 
@@ -37,14 +39,17 @@ render(
     <FirebaseProvider app={app}>
       <SignInProvider>
         <Router>
-          <Route path="/" component={Home} />
-          <Route path="/signin" component={SignIn} />
-          <Route path="/" component={AuthGuard}>
-            <Route path="/:topic/edit" component={Edit} />
-          </Route>
-          <Route path="/:topic" component={Layout}>
-            <Route path="/" component={List} />
-          </Route>
+          <Route path="/" info={{ breadcrumbs: ["/"] }} component={Home} />
+          <Route
+            path="/:topic"
+            component={App}
+            info={{ breadcrumbs: ["/", "/:topic"] }}
+          />
+          <Route
+            path="/:topic/edit"
+            info={{ breadcrumbs: ["/", "/:topic", "/edit"] }}
+            component={RequireAuth(Edit)}
+          />
         </Router>
       </SignInProvider>
     </FirebaseProvider>

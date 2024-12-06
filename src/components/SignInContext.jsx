@@ -1,11 +1,6 @@
-import {
-  createContext,
-  createSignal,
-  createEffect,
-  useContext,
-} from "solid-js";
+import { createContext, createSignal, useContext } from "solid-js";
 import cc from "classcat";
-import { useFirebaseApp, useAuth } from "solid-firebase";
+import { useFirebaseApp } from "solid-firebase";
 import {
   GoogleAuthProvider,
   signInWithPopup,
@@ -18,8 +13,8 @@ const SignInContext = createContext();
 export function SignInProvider(props) {
   const app = useFirebaseApp();
   const auth = getAuth(app);
-  const user = useAuth(auth);
 
+  const [userExists, setUserExists] = createSignal(false);
   const [isSignInOpen, setIsSignInOpen] = createSignal(false);
 
   const signIn = () => signInWithPopup(auth, new GoogleAuthProvider());
@@ -27,13 +22,16 @@ export function SignInProvider(props) {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       setIsSignInOpen(false);
+      setUserExists(true);
+    } else {
+      setUserExists(false);
     }
   });
 
   return (
     <SignInContext.Provider value={[isSignInOpen, setIsSignInOpen]}>
-      <>
-        {props.children}
+      {props.children}
+      <Show when={!userExists()}>
         <dialog
           id="signin"
           class={cc({ modal: true, "modal-open": isSignInOpen() })}
@@ -47,7 +45,7 @@ export function SignInProvider(props) {
             <button onClick={() => setIsSignInOpen(false)}>close</button>
           </form>
         </dialog>
-      </>
+      </Show>
     </SignInContext.Provider>
   );
 }
