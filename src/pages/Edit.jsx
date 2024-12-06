@@ -107,12 +107,16 @@ function Edit() {
   };
 
   const handleNewItemNameChange = (e) => {
+    e.preventDefault();
+
     setState("items", state.items.length, {
       name: e.target.value,
       tags: [],
     });
 
     e.target.value = "";
+
+    return false;
   };
 
   const tagList = () =>
@@ -157,12 +161,13 @@ function Edit() {
                     />
                   </svg>
                 </div>
-                <div class="timeline-end">
-                  <section class="m-2">
+                <div class="timeline-end w-full">
+                  <section class="m-2 mt-0">
+                    <h2 class="text-xl font-bold mb-2">Set your title</h2>
                     <input
                       type="text"
                       placeholder="Enter title"
-                      class="input input-bordered w-full max-w-xs"
+                      class="input input-bordered w-full m:max-w-xs"
                       value={state.title}
                       onchange={handleChangeTitle}
                       required
@@ -190,8 +195,9 @@ function Edit() {
                     />
                   </svg>
                 </div>
-                <div class="timeline-end">
-                  <section class="m-2">
+                <div class="timeline-end w-full">
+                  <section class="m-2 mt-0 flex flex-col gap-2">
+                    <h2 class="text-xl font-bold">Add groups</h2>
                     <For each={state.groups}>
                       {(group, g) => {
                         const [, setGroup] = createStore(group);
@@ -211,43 +217,31 @@ function Edit() {
                         };
 
                         return (
-                          <div class="flex flex-row gap-2">
-                            <label class="form-control w-full max-w-xs">
-                              <div class="label">
-                                <span class="label-text">Name</span>
-                              </div>
-                              <input
-                                class="input input-bordered"
-                                type="text"
-                                value={group.name}
-                                onchange={handleGroupNameChange}
-                                placeholder="Group name"
+                          <div class="flex flex-col md:flex-row gap-2 rounded-box bg-base-200 p-2">
+                            <input
+                              class="input input-bordered md:flex-1"
+                              type="text"
+                              value={group.name}
+                              onchange={handleGroupNameChange}
+                              placeholder="Group name"
+                            />
+                            <div class="flex flex-col md:flex-1 gap-2">
+                              <TagInput
+                                tags={group.tags}
+                                onChange={handleGroupTagChange}
                               />
-                            </label>
-                            <label class="form-control w-full max-w-xs">
-                              <div class="label">
-                                <span class="label-text">Tags</span>
-                              </div>
-                              <div class="flex flex-col gap-2">
-                                <TagInput
-                                  tags={group.tags}
-                                  onChange={handleGroupTagChange}
-                                />
-                              </div>
-                            </label>
+                            </div>
                           </div>
                         );
                       }}
                     </For>
-                    <div>
-                      <input
-                        class="input input-bordered"
-                        type="text"
-                        placeholder="Add a new group"
-                        onchange={handleNewGroupNameChange}
-                        required={state.groups.length === 0}
-                      />
-                    </div>
+                    <input
+                      class="input input-bordered"
+                      type="text"
+                      placeholder="Add a new group"
+                      onchange={handleNewGroupNameChange}
+                      required={state.groups.length === 0}
+                    />
                   </section>
                 </div>
                 <hr />
@@ -271,8 +265,9 @@ function Edit() {
                     />
                   </svg>
                 </div>
-                <div class="timeline-end">
-                  <section class="m-2">
+                <div class="timeline-end w-full">
+                  <section class="m-2 mt-0 flex flex-col gap-2">
+                    <h2 class="text-xl font-bold">Add checklist items</h2>
                     <For each={state.items}>
                       {(item, i) => {
                         const [, setItem] = createStore(item);
@@ -292,44 +287,34 @@ function Edit() {
                         };
 
                         return (
-                          <div class="flex flex-row gap-2">
-                            <label class="form-control w-full max-w-xs">
-                              <div class="label">
-                                <span class="label-text">Name</span>
-                              </div>
-                              <input
-                                class="input input-bordered"
-                                type="text"
-                                value={item.name}
-                                onchange={handleItemNameChange}
-                                placeholder="Item name"
+                          <div class="flex flex-col md:flex-row gap-2 rounded-box bg-base-200 p-2">
+                            <input
+                              class="input input-bordered md:flex-1"
+                              type="text"
+                              value={item.name}
+                              onchange={handleItemNameChange}
+                              placeholder="Item name"
+                            />
+                            <div class="flex flex-col md:flex-1 gap-2">
+                              <TagInput
+                                tags={item.tags}
+                                list="tags"
+                                onChange={handleItemTagChange}
                               />
-                            </label>
-                            <label class="form-control w-full max-w-xs">
-                              <div class="label">
-                                <span class="label-text">Tags</span>
-                              </div>
-                              <div class="flex flex-col gap-2">
-                                <TagInput
-                                  tags={item.tags}
-                                  list="tags"
-                                  onChange={handleItemTagChange}
-                                />
-                              </div>
-                            </label>
+                            </div>
                           </div>
                         );
                       }}
                     </For>
-                    <div>
-                      <input
-                        class="input input-bordered"
-                        type="text"
-                        placeholder="Add a new item"
-                        onchange={handleNewItemNameChange}
-                        required={state.items.length === 0}
-                      />
-                    </div>
+                    {/* <div class="flex flex-col md:flex-row gap-2 rounded-box bg-base-200 p-2"> */}
+                    <input
+                      class="input input-bordered"
+                      type="text"
+                      placeholder="Add a new item"
+                      onchange={handleNewItemNameChange}
+                      required={state.items.length === 0}
+                    />
+                    {/* </div> */}
                   </section>
                 </div>
                 <hr />
@@ -353,11 +338,11 @@ function Edit() {
                     />
                   </svg>
                 </div>
-                <div class="timeline-end">
+                <div class="timeline-end w-full">
                   <section class="m-2">
                     {" "}
                     <button
-                      class="btn btn-secondary"
+                      class="btn btn-secondary w-full md:w-auto"
                       onClick="preview.showModal(); return false;"
                     >
                       Preview
@@ -385,10 +370,12 @@ function Edit() {
                     />
                   </svg>
                 </div>
-                <div class="timeline-end">
+                <div class="timeline-end w-full">
                   <section class="m-2">
-                    {" "}
-                    <button class="btn btn-primary" type="submit">
+                    <button
+                      class="btn btn-primary w-full md:w-auto"
+                      type="submit"
+                    >
                       Save
                     </button>
                   </section>
