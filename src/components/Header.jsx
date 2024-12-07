@@ -41,13 +41,7 @@ function Header(props) {
 
   const matches = useCurrentMatches();
 
-  createEffect(() =>
-    console.log("matches", matches(), matches().at(-1).route.info.breadcrumbs)
-  );
-
   const path = () => matches().at(-1).route.key.path;
-
-  createEffect(() => console.log("path", path()));
 
   return (
     <header class="pl-4 pr-4">

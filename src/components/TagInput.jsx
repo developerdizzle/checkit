@@ -20,17 +20,8 @@ function TagInput(props) {
   createEffect(() => props?.onChange(Array.from(tags)));
 
   return (
-    <div class="flex flex-col">
-      <label class="input input-bordered flex flex-grow items-center gap-2">
-        <input
-          type="text"
-          class="grow"
-          placeholder="Add a tag"
-          list={props.list}
-          onKeyPress={onKeyPress}
-        />
-      </label>
-      <div class="flex flex-row flex-grow flex-wrap items-center mt-2 gap-2">
+    <div class="flex flex-col gap-2">
+      <div class="flex flex-row flex-grow flex-wrap items-center gap-2">
         <For each={Array.from(tags)}>
           {(tag) => (
             <span
@@ -42,6 +33,15 @@ function TagInput(props) {
           )}
         </For>
       </div>
+      <label class="input input-bordered flex flex-grow items-center gap-2">
+        <input
+          type="text"
+          class="grow"
+          placeholder="Add a tag"
+          list={props.list}
+          onKeyPress={onKeyPress}
+        />
+      </label>
     </div>
   );
 }

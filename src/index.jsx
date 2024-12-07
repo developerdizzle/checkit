@@ -39,17 +39,9 @@ render(
     <FirebaseProvider app={app}>
       <SignInProvider>
         <Router>
-          <Route path="/" info={{ breadcrumbs: ["/"] }} component={Home} />
-          <Route
-            path="/:topic"
-            component={App}
-            info={{ breadcrumbs: ["/", "/:topic"] }}
-          />
-          <Route
-            path="/:topic/edit"
-            info={{ breadcrumbs: ["/", "/:topic", "/edit"] }}
-            component={RequireAuth(Edit)}
-          />
+          <Route path="/" component={Home} />
+          <Route path="/:topic" component={App} />
+          <Route path="/:topic/edit" component={RequireAuth(Edit)} />
         </Router>
       </SignInProvider>
     </FirebaseProvider>

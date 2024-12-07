@@ -111,6 +111,7 @@ function Edit() {
 
     setState("items", state.items.length, {
       name: e.target.value,
+      description: "",
       tags: [],
     });
 
@@ -130,6 +131,10 @@ function Edit() {
       }, new Set())
     );
 
+  const preventEnterSubmit = (e) => {
+    if (e.which == 13) return false;
+  };
+
   return (
     <Suspense fallback={<Loading />}>
       <Show when={docSnap()}>
@@ -138,15 +143,12 @@ function Edit() {
           <h1 class="text-2xl md:text-4xl text-primary font-bold">
             {state.title}
           </h1>
-          <form onsubmit={handleSubmit}>
+          <form onkeydown={preventEnterSubmit} onsubmit={handleSubmit}>
             <datalist id="tags">
               <For each={tagList()}>{(tag) => <option>{tag}</option>}</For>
             </datalist>
             <ul class="timeline timeline-snap-icon timeline-vertical">
               <li>
-                {/* <div class="timeline-start !self-start mr-2">
-                  Set your title
-                </div> */}
                 <div class="timeline-middle">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -162,8 +164,11 @@ function Edit() {
                   </svg>
                 </div>
                 <div class="timeline-end w-full">
-                  <section class="m-2 mt-0">
-                    <h2 class="text-xl font-bold mb-2">Set your title</h2>
+                  <section class="m-2 mt-0 flex flex-col gap-2">
+                    <h2 class="text-xl font-bold">Set your title</h2>
+                    <p class="text-sm">
+                      This will appear at the top of your checklist.
+                    </p>
                     <input
                       type="text"
                       placeholder="Enter title"
@@ -178,9 +183,6 @@ function Edit() {
               </li>
               <li>
                 <hr />
-                {/* <div class="timeline-start !self-start mr-2">
-                  Add your groups
-                </div> */}
                 <div class="timeline-middle">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -198,6 +200,14 @@ function Edit() {
                 <div class="timeline-end w-full">
                   <section class="m-2 mt-0 flex flex-col gap-2">
                     <h2 class="text-xl font-bold">Add groups</h2>
+                    <p class="text-sm">
+                      A group is a type of category, such as{" "}
+                      <strong>Author</strong> or <strong>Genre</strong>. Each
+                      group contains a set of tags that describe a single
+                      category of items, such as <strong>Stephen King</strong>{" "}
+                      or <strong>Fiction</strong>. These tags will be added to
+                      checklist items so that they can be grouped.
+                    </p>
                     <For each={state.groups}>
                       {(group, g) => {
                         const [, setGroup] = createStore(group);
@@ -248,9 +258,6 @@ function Edit() {
               </li>
               <li>
                 <hr />
-                {/* <div class="timeline-start !self-start mr-2">
-                  Add your checklist items
-                </div> */}
                 <div class="timeline-middle">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -268,6 +275,10 @@ function Edit() {
                 <div class="timeline-end w-full">
                   <section class="m-2 mt-0 flex flex-col gap-2">
                     <h2 class="text-xl font-bold">Add checklist items</h2>
+                    <p class="text-sm">
+                      Each item is a single checkbox. Tagged items will show up
+                      under the corresponding group(s).
+                    </p>
                     <For each={state.items}>
                       {(item, i) => {
                         const [, setItem] = createStore(item);
@@ -282,19 +293,34 @@ function Edit() {
                           }
                         };
 
+                        const handleItemDescriptionChange = (e) => {
+                          setItem("description", e.target.value || undefined);
+                        };
+
                         const handleItemTagChange = (tags) => {
                           setItem("tags", tags);
                         };
 
                         return (
                           <div class="flex flex-col md:flex-row gap-2 rounded-box bg-base-200 p-2">
-                            <input
-                              class="input input-bordered md:flex-1"
-                              type="text"
-                              value={item.name}
-                              onchange={handleItemNameChange}
-                              placeholder="Item name"
-                            />
+                            <div class="flex flex-col md:flex-1 gap-2">
+                              <div class="flex flex-col gap-2">
+                                <input
+                                  class="input input-bordered"
+                                  type="text"
+                                  value={item.name}
+                                  onchange={handleItemNameChange}
+                                  placeholder="Item name"
+                                />
+                                <input
+                                  class="input input-bordered input-sm"
+                                  type="text"
+                                  value={item.description || ""}
+                                  onchange={handleItemDescriptionChange}
+                                  placeholder="Item description (optional)"
+                                />
+                              </div>
+                            </div>
                             <div class="flex flex-col md:flex-1 gap-2">
                               <TagInput
                                 tags={item.tags}
@@ -306,7 +332,6 @@ function Edit() {
                         );
                       }}
                     </For>
-                    {/* <div class="flex flex-col md:flex-row gap-2 rounded-box bg-base-200 p-2"> */}
                     <input
                       class="input input-bordered"
                       type="text"
@@ -314,16 +339,12 @@ function Edit() {
                       onchange={handleNewItemNameChange}
                       required={state.items.length === 0}
                     />
-                    {/* </div> */}
                   </section>
                 </div>
                 <hr />
               </li>
               <li>
                 <hr />
-                {/* <div class="timeline-start !self-start mr-2">
-                  Preview your checklist
-                </div> */}
                 <div class="timeline-middle">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -340,8 +361,8 @@ function Edit() {
                 </div>
                 <div class="timeline-end w-full">
                   <section class="m-2">
-                    {" "}
                     <button
+                      type="button"
                       class="btn btn-secondary w-full md:w-auto"
                       onClick="preview.showModal(); return false;"
                     >

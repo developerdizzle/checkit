@@ -5,7 +5,7 @@ function Tabs(props) {
   const selectedTab = () => props.selectedTab || props.tabs[0];
 
   return (
-    <Show when={props.tabs.length > 1}>
+    <Show when={props.tabs.length > 0}>
       <section>
         <div
           role="tablist"

@@ -1,27 +1,30 @@
 function Item(props) {
   return (
-    <div class="flex flex-col">
-      <div class="form-control">
-        <label class="cursor-pointer label flex flex-row">
-          <span class="label-text grow">{props.name}&nbsp;</span>
+    <label class="cursor-pointer flex flex-col gap-1">
+      <div class="flex flex-row gap-2">
+        <span class="flex flex-row flex-wrap grow items-center justify-end gap-1">
+          <span class="text-md grow">{props.name}</span>
           <For each={props.tags}>
             {(tag) => {
               return (
-                <span class="badge badge-accent badge-sm badge-xoutline mr-2 truncate justify-normal">
+                <span class="badge badge-accent badge-sm justify-self-end xjustify-normal">
                   {tag}
                 </span>
               );
             }}
           </For>
-          <input
-            type="checkbox"
-            checked={props.isComplete}
-            class="checkbox checkbox-info"
-            onchange={props.onChange}
-          />
-        </label>
+        </span>
+        <input
+          type="checkbox"
+          checked={props.isComplete}
+          class="checkbox checkbox-info"
+          onchange={props.onChange}
+        />
       </div>
-    </div>
+      <Show when={props.description}>
+        <div class="opacity-60 text-xs">{props.description}</div>
+      </Show>
+    </label>
   );
 }
 

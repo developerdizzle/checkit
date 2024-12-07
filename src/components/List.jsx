@@ -60,7 +60,7 @@ function List(props) {
                   value={percentage()}
                   max="100"
                 />
-                <div class="mb-4">
+                <div class="mb-4 flex flex-col gap-2">
                   <For each={items()}>
                     {(item) => {
                       const isComplete = () => getItemCompleted(item);
@@ -80,6 +80,7 @@ function List(props) {
                       return (
                         <Item
                           name={item.name}
+                          description={item.description}
                           tags={tags()}
                           isComplete={isComplete()}
                           onChange={handleChange}
