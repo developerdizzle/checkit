@@ -1,8 +1,15 @@
 import cc from "classcat";
 import { createEffect, createSignal } from "solid-js";
+import { getAnalytics, logEvent } from "firebase/analytics";
+import { useParams } from "@solidjs/router";
+
 import { Item } from "./Item";
 
 function List(props) {
+  const { topic } = useParams();
+
+  const analytics = getAnalytics();
+
   const [checkedItems, setCheckedItems] = createSignal(
     props.checkedItems || []
   );
@@ -60,13 +67,18 @@ function List(props) {
                   value={percentage()}
                   max="100"
                 />
-                <div class="mb-4 flex flex-col gap-2">
+                <div class="mb-4 mt-2 flex flex-col gap-2">
                   <For each={items()}>
                     {(item) => {
                       const isComplete = () => getItemCompleted(item);
 
                       const handleChange = (e) => {
                         if (e.target.checked) {
+                          logEvent(analytics, "item_checked", {
+                            topic,
+                            item: item.name,
+                          });
+
                           setCheckedItems((si) => [...si, item.name]);
                         } else {
                           setCheckedItems((si) =>

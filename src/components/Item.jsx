@@ -7,7 +7,7 @@ function Item(props) {
           <For each={props.tags}>
             {(tag) => {
               return (
-                <span class="badge badge-accent badge-sm justify-self-end xjustify-normal">
+                <span class="badge badge-accent badge-sm justify-self-end">
                   {tag}
                 </span>
               );

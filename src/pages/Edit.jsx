@@ -1,5 +1,3 @@
-import cc from "classcat";
-
 import { createEffect, createResource } from "solid-js";
 import { createStore, unwrap } from "solid-js/store";
 import { useParams, useNavigate } from "@solidjs/router";
@@ -7,12 +5,12 @@ import { useParams, useNavigate } from "@solidjs/router";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { useFirebaseApp, useAuth } from "solid-firebase";
 import { getAuth } from "firebase/auth";
+import { getAnalytics, logEvent } from "firebase/analytics";
 
 import { Header } from "../components/Header";
 import { TagInput } from "../components/TagInput";
 import { Loading } from "../components/Loading";
 import { Preview } from "../components/Preview";
-import { Instructions } from "../components/Instructions";
 
 const DEFAULT_DATA = {
   title: "Summer reading list",
@@ -51,6 +49,8 @@ function Edit() {
   const auth = getAuth(app);
   const user = useAuth(auth);
 
+  const analytics = getAnalytics();
+
   const [docSnap] = createResource(async () => {
     const docSnap = await getDoc(doc(db, "topics", topic));
 
@@ -88,6 +88,10 @@ function Edit() {
 
     try {
       await setDoc(doc(db, "topics", topic), unwrap(state));
+
+      logEvent(analytics, "topic_saved", {
+        topic,
+      });
 
       navigate(`/${topic}`);
     } catch (ex) {
