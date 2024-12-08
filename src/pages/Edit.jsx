@@ -79,6 +79,14 @@ function Edit() {
     window.loadJSON = (json) => setState(json);
   });
 
+  createEffect(() => {
+    window.exportJSON = () => {
+      const exportedState = { ...unwrap(state) };
+      delete exportedState.uid;
+      return exportedState;
+    };
+  });
+
   const handleChangeTitle = (e) => {
     setState("title", e.target.value);
   };
