@@ -147,6 +147,27 @@ function Edit() {
     if (e.which == 13) return false;
   };
 
+  const groupsLength = () => state.groups.length;
+  const itemsLength = () => state.items.length;
+
+  const moveGroup = (from, to) => {
+    console.log("moveGroup", from, to);
+    const updated = state.groups.slice();
+
+    updated.splice(to, 0, ...updated.splice(from, 1));
+
+    setState("groups", updated);
+  };
+
+  const moveItem = (from, to) => {
+    console.log("moveItem", from, to);
+    const updated = state.items.slice();
+
+    updated.splice(to, 0, ...updated.splice(from, 1));
+
+    setState("items", updated);
+  };
+
   return (
     <Suspense fallback={<Loading />}>
       <Show when={docSnap()}>
@@ -238,8 +259,51 @@ function Edit() {
                           setGroup("tags", tags);
                         };
 
+                        const handleMoveUp = (e) => {
+                          e.preventDefault();
+                          console.log("move up");
+                          moveGroup(g(), g() - 1);
+                        };
+                        const handleMoveDown = (e) => {
+                          e.preventDefault();
+                          console.log("move down");
+                          moveGroup(g(), g() + 1);
+                        };
+
                         return (
                           <div class="flex flex-col md:flex-row gap-2 rounded-box bg-base-200 p-2">
+                            <div class="flex flex-row md:flex-col gap-2">
+                              <Show when={g() > 0}>
+                                <button
+                                  class="btn btn-sm btn-ghost btn-circle"
+                                  onclick={handleMoveUp}
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="size-5"
+                                    viewBox="0 -960 960 960"
+                                    fill="currentColor"
+                                  >
+                                    <path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z" />
+                                  </svg>
+                                </button>
+                              </Show>
+                              <Show when={g() + 1 < groupsLength()}>
+                                <button
+                                  class="btn btn-sm btn-ghost btn-circle"
+                                  onclick={handleMoveDown}
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="size-5"
+                                    viewBox="0 -960 960 960"
+                                    fill="currentColor"
+                                  >
+                                    <path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z" />
+                                  </svg>
+                                </button>
+                              </Show>
+                            </div>
                             <input
                               class="input input-bordered md:flex-1"
                               type="text"
@@ -313,8 +377,51 @@ function Edit() {
                           setItem("tags", tags);
                         };
 
+                        const handleMoveUp = (e) => {
+                          e.preventDefault();
+                          console.log("move up");
+                          moveItem(i(), i() - 1);
+                        };
+                        const handleMoveDown = (e) => {
+                          e.preventDefault();
+                          console.log("move down");
+                          moveItem(i(), i() + 1);
+                        };
+
                         return (
                           <div class="flex flex-col md:flex-row gap-2 rounded-box bg-base-200 p-2">
+                            <div class="flex flex-row md:flex-col gap-2">
+                              <Show when={i() > 0}>
+                                <button
+                                  class="btn btn-sm btn-ghost btn-circle"
+                                  onclick={handleMoveUp}
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="size-5"
+                                    viewBox="0 -960 960 960"
+                                    fill="currentColor"
+                                  >
+                                    <path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z" />
+                                  </svg>
+                                </button>
+                              </Show>
+                              <Show when={i() + 1 < itemsLength()}>
+                                <button
+                                  class="btn btn-sm btn-ghost btn-circle"
+                                  onclick={handleMoveDown}
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="size-5"
+                                    viewBox="0 -960 960 960"
+                                    fill="currentColor"
+                                  >
+                                    <path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z" />
+                                  </svg>
+                                </button>
+                              </Show>
+                            </div>
                             <div class="flex flex-col md:flex-1 gap-2">
                               <div class="flex flex-col gap-2">
                                 <input
@@ -386,9 +493,6 @@ function Edit() {
               </li>
               <li>
                 <hr />
-                {/* <div class="timeline-start !self-start mr-2">
-                  Save your checklist
-                </div> */}
                 <div class="timeline-middle">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
