@@ -1,6 +1,6 @@
 import { getAuth } from "firebase/auth";
 import { useFirebaseApp, useAuth } from "solid-firebase";
-import { Switch, Match, createEffect, onMount } from "solid-js";
+import { Switch, Match, onMount } from "solid-js";
 
 import { Loading } from "./Loading";
 import { useSignIn } from "./SignInContext";
