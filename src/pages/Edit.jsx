@@ -205,7 +205,7 @@ function Edit() {
                     <input
                       type="text"
                       placeholder="Enter title"
-                      class="input input-bordered w-full m:max-w-xs"
+                      class="input input-bordered placeholder:opacity-60 w-full m:max-w-xs"
                       value={state.title}
                       onchange={handleChangeTitle}
                       required
@@ -305,7 +305,7 @@ function Edit() {
                               </Show>
                             </div>
                             <input
-                              class="input input-bordered md:flex-1"
+                              class="input input-bordered placeholder:opacity-60 md:flex-1"
                               type="text"
                               value={group.name}
                               onchange={handleGroupNameChange}
@@ -322,7 +322,7 @@ function Edit() {
                       }}
                     </For>
                     <input
-                      class="input input-bordered"
+                      class="input input-bordered placeholder:opacity-60"
                       type="text"
                       placeholder="Add a new group"
                       onchange={handleNewGroupNameChange}
@@ -425,14 +425,14 @@ function Edit() {
                             <div class="flex flex-col md:flex-1 gap-2">
                               <div class="flex flex-col gap-2">
                                 <input
-                                  class="input input-bordered"
+                                  class="input input-bordered placeholder:opacity-60"
                                   type="text"
                                   value={item.name}
                                   onchange={handleItemNameChange}
                                   placeholder="Item name"
                                 />
                                 <input
-                                  class="input input-bordered input-sm"
+                                  class="input input-bordered input-sm placeholder:opacity-60"
                                   type="text"
                                   value={item.description || ""}
                                   onchange={handleItemDescriptionChange}
@@ -452,7 +452,7 @@ function Edit() {
                       }}
                     </For>
                     <input
-                      class="input input-bordered"
+                      class="input input-bordered placeholder:opacity-60"
                       type="text"
                       placeholder="Add a new item"
                       onchange={handleNewItemNameChange}

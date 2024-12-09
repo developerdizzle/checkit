@@ -36,7 +36,7 @@ function TagInput(props) {
       <label class="input input-bordered flex flex-grow items-center gap-2">
         <input
           type="text"
-          class="grow"
+          class="grow placeholder:opacity-60"
           placeholder="Add a tag"
           list={props.list}
           onKeyPress={onKeyPress}
